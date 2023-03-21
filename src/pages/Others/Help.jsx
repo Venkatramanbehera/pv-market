@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const Help = () => (
   <>
     <div
@@ -18,12 +20,14 @@ export const Help = () => (
         />
       </a>
       <div className="nav-spacer" />
-      <a
-        href="../dashboard.html"
-        className="nav-link cta margin-right w-nav-link"
-      >
-        Back to Dashboard
-      </a>
+      <Link to={"/dashboard"}>
+        <a
+          href="../dashboard.html"
+          className="nav-link cta margin-right w-nav-link"
+        >
+          Back to Dashboard
+        </a>
+      </Link>
       <div
         data-hover="false"
         data-delay={0}
@@ -237,24 +241,34 @@ export const Help = () => (
                     </div>
                     <div className="module-main">
                       <ul role="list" className="link-list">
-                        <li>
-                          <a href="../pages/help-page.html">
-                            Change account details
-                          </a>
-                        </li>
-                        <li>
-                          <a href="../pages/help-page.html">Update password</a>
-                        </li>
-                        <li>
-                          <a href="../pages/help-page.html">
-                            Edit email notifications
-                          </a>
-                        </li>
-                        <li>
-                          <a href="../pages/help-page.html">
-                            Delete your account
-                          </a>
-                        </li>
+                        <Link to={"/helppage"}>
+                          <li>
+                            <a href="../pages/help-page.html">
+                              Change account details
+                            </a>
+                          </li>
+                        </Link>
+                        <Link to={"/helppage"}>
+                          <li>
+                            <a href="../pages/help-page.html">
+                              Update password
+                            </a>
+                          </li>
+                        </Link>
+                        <Link to={"/helppage"}>
+                          <li>
+                            <a href="../pages/help-page.html">
+                              Edit email notifications
+                            </a>
+                          </li>
+                        </Link>
+                        <Link to={"/helppage"}>
+                          <li>
+                            <a href="../pages/help-page.html">
+                              Delete your account
+                            </a>
+                          </li>
+                        </Link>
                       </ul>
                     </div>
                   </div>

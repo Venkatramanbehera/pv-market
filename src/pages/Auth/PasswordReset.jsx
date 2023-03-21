@@ -1,3 +1,7 @@
+import "./auth.css"
+import logo from "../../assets/images/PVMarket-Logo.png"
+
+
 const PasswordReset = () => (
   <>
     <div className="center-card-container">
@@ -7,7 +11,7 @@ const PasswordReset = () => (
       >
         <a href="../dashboard.html" className="center-image w-inline-block">
           <img
-            src="../images/PVMarket-Logo.png"
+            src={logo}
             loading="lazy"
             width={150}
             alt=""

@@ -1,17 +1,24 @@
+import { Link } from "react-router-dom";
+import logo from "../../assets/images/PVMarket-Logo.png"
+import collapse from "../../assets/images/Collapse-Icon.svg"
+import "./auth.css"
+
 const SignIn = () => (
   <>
     <div className="center-card-container">
       <div
         data-w-id="df4cd933-feb9-dc4d-e842-84be2411378c"
-        // style={{ opacity: 0 }}
+        style={{
+          // opacity: 0,
+        }}
         className="center-card"
       >
         <div id="signin-back" className="signin-back" onclick="prev()">
-          <img src="../images/Collapse-Icon.svg" loading="lazy" alt="" />
+          <img src={collapse} loading="lazy" alt="" />
         </div>
         <a href="../dashboard.html" className="center-image w-inline-block">
           <img
-            src="../images/PVMarket-Logo.png"
+            src={logo}
             loading="lazy"
             width={150}
             alt=""
@@ -46,6 +53,7 @@ const SignIn = () => (
                 required=""
               />
               <div className="spacer _24" />
+              <Link to={"/dashboard"}>
               <input
                 type="button"
                 defaultValue="Next"
@@ -53,6 +61,7 @@ const SignIn = () => (
                 className="button no-margin w-button"
                 onclick="next()"
               />
+              </Link>
             </div>
             <div id="otpScreen">
               <label htmlFor="Subscriber-Email-3" className="field-label">
@@ -86,10 +95,12 @@ const SignIn = () => (
         </div>
         <p className="paragraph-small">
           Forgot your telephone?{" "}
+          <Link to={"/password_reset"}>
           <a href="../pages/password-reset.html" className="simple-link">
             Try with Email
           </a>
           .
+          </Link>
         </p>
       </div>
     </div>
