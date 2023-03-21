@@ -45,7 +45,7 @@
 .payment-method-tab {
   display: flex;
   margin-bottom: 10px;
-  padding: 10px 10px 10px 55px;
+  padding: 10px 10px 10px 20px;
   justify-content: space-between;
   align-items: center;
   border-style: solid;
@@ -56,7 +56,6 @@
   border-left-color: hsla(216, 14.29%, 93.14%, 1);
   border-radius: 5px;
   background-color: white;
-  background-image: url("../images/passive-select.svg");
   background-position: 20px 50%;
   background-size: 15px;
   background-repeat: no-repeat;
@@ -72,7 +71,6 @@
   border-bottom-color: hsla(226.627, 80.58%, 59.61%, 1);
   border-left-color: hsla(226.627, 80.58%, 59.61%, 1);
   background-color: white;
-  background-image: url("../images/active-select.svg");
   background-position: 20px 50%;
   background-size: 15px;
   background-repeat: no-repeat;

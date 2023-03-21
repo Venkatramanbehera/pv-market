@@ -6,11 +6,16 @@ const Wallet = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectDemoTypeModal, setSelectDemoTypeModal] = useState(false);
   const [step, setStep] = useState(0);
+  const [paymentMethod, setPaymentMethod] = useState("credit-card");
+  const [demoTypeValue, setDemoTypeValue] = useState("");
   const handleOpenModal = () => {
     setIsModalOpen(!isModalOpen);
   };
   const handleChangeDemoTypeModal = () => {
     setSelectDemoTypeModal(!selectDemoTypeModal);
+  };
+  const handleChangeDropdown = (e) => {
+    setDemoTypeValue(e.target.value);
   };
 
   return (
@@ -48,21 +53,28 @@ const Wallet = () => {
                         className="payment-method-tab-menu w-tab-menu"
                         role="tablist"
                       >
-                        <a
-                          data-w-tab="Tab 1"
-                          data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf921ec"
-                          data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921ec"]'
-                          className="payment-method-tab w-inline-block w-tab-link w--current"
-                          id="w-tabs-1-data-w-tab-0"
-                          href="#w-tabs-1-data-w-pane-0"
-                          role="tab"
-                          aria-controls="w-tabs-1-data-w-pane-0"
+                        <div
+                          className={
+                            paymentMethod === "credit-card"
+                              ? "payment-method-tab w-inline-block w-tab-link  w--current"
+                              : "payment-method-tab w-inline-block w-tab-link"
+                          }
                           aria-selected="true"
+                          onClick={() => {
+                            setPaymentMethod("credit-card");
+                          }}
                         >
                           <div
                             data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf921ed"
                             data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921ed"]'
                           >
+                            <input
+                              type="checkbox"
+                              name="credit-card"
+                              id=""
+                              value={paymentMethod}
+                              checked={paymentMethod === "credit-card"}
+                            />
                             <div
                               data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf921ee"
                               data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921ee"]'
@@ -89,41 +101,31 @@ const Wallet = () => {
                             data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921f3"]'
                             alt=""
                           />
-                        </a>
-                        <a
-                          data-w-tab="Tab 2"
-                          data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf921f4"
-                          data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921f4"]'
-                          className="payment-method-tab w-inline-block w-tab-link"
-                          id="w-tabs-1-data-w-tab-1"
-                          href="#w-tabs-1-data-w-pane-1"
-                          role="tab"
-                          aria-controls="w-tabs-1-data-w-pane-1"
+                        </div>
+                        <div
+                          className={
+                            paymentMethod === "pay-pal"
+                              ? "payment-method-tab w-inline-block w-tab-link  w--current"
+                              : "payment-method-tab w-inline-block w-tab-link"
+                          }
                           aria-selected="false"
                           tabIndex={-1}
+                          onClick={() => {
+                            setPaymentMethod("pay-pal");
+                          }}
                         >
-                          <div
-                            data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf921f5"
-                            data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921f5"]'
-                          >
-                            <div
-                              data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf921f6"
-                              data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921f6"]'
-                            >
-                              <strong
-                                data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf921f7"
-                                data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921f7"]'
-                              >
-                                Paypal
-                              </strong>
+                          <div>
+                            <input
+                              type="checkbox"
+                              name="credit-card"
+                              id=""
+                              value={paymentMethod}
+                              checked={paymentMethod === "pay-pal"}
+                            />
+                            <div>
+                              <strong>Paypal</strong>
                             </div>
-                            <div
-                              data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf921f9"
-                              data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921f9"]'
-                              className="hint grey-text"
-                            >
-                              Online payment
-                            </div>
+                            <div className="hint grey-text">Online payment</div>
                           </div>
                           <img
                             src="https://uploads-ssl.webflow.com/5d2f26e24904ea2ed96c0fac/5d599aca8602db8108976eb5_icons8-paypal-100%20(4).png"
@@ -132,230 +134,214 @@ const Wallet = () => {
                             data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921fb"]'
                             alt=""
                           />
-                        </a>
+                        </div>
                       </div>
-                      <div
-                        data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf921fc"
-                        data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921fc"]'
-                        className="payment-method-content w-tab-content"
-                      >
+                      {paymentMethod === "credit-card" ? (
                         <div
-                          data-w-tab="Tab 1"
-                          data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf921fd"
-                          data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921fd"]'
-                          className="w-tab-pane w--tab-active"
-                          id="w-tabs-1-data-w-pane-0"
-                          role="tabpanel"
-                          aria-labelledby="w-tabs-1-data-w-tab-0"
-                          style={{
-                            opacity: 1,
-                            transition: "opacity 300ms ease 0s",
-                          }}
+                          data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf921fc"
+                          data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921fc"]'
+                          className="payment-method-content w-tab-content"
                         >
                           <div
-                            data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf921fe"
-                            data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921fe"]'
-                            className="w-form"
+                            data-w-tab="Tab 1"
+                            data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf921fd"
+                            data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921fd"]'
+                            className="w-tab-pane w--tab-active"
+                            id="w-tabs-1-data-w-pane-0"
+                            role="tabpanel"
+                            aria-labelledby="w-tabs-1-data-w-tab-0"
+                            style={{
+                              opacity: 1,
+                              transition: "opacity 300ms ease 0s",
+                            }}
                           >
-                            <form
-                              method="get"
-                              name="email-form"
-                              data-name="Email Form"
-                              data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf921ff"
-                              data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921ff"]'
-                              id="email-form"
-                              aria-label="Email Form"
+                            <div
+                              data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf921fe"
+                              data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921fe"]'
+                              className="w-form"
                             >
-                              <div
-                                data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92200"
-                                data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92200"]'
-                                className="form-group"
+                              <form
+                                method="get"
+                                name="email-form"
+                                data-name="Email Form"
+                                data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf921ff"
+                                data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921ff"]'
+                                id="email-form"
+                                aria-label="Email Form"
                               >
-                                <label
-                                  htmlFor="name"
-                                  data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92201"
-                                  data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92201"]'
-                                  className="label"
-                                >
-                                  Card number
-                                </label>
-                                <input
-                                  className="input w-input"
-                                  maxLength={256}
-                                  name="name-4"
-                                  data-name="Name 4"
-                                  placeholder="4444 4444 4444 4444"
-                                  data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92203"
-                                  data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92203"]'
-                                  type="tel"
-                                  id="name-4"
-                                />
                                 <div
-                                  data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92204"
-                                  data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92204"]'
+                                  data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92200"
+                                  data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92200"]'
                                   className="form-group"
                                 >
+                                  <label
+                                    htmlFor="name"
+                                    data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92201"
+                                    data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92201"]'
+                                    className="label"
+                                  >
+                                    Card number
+                                  </label>
+                                  <input
+                                    className="input w-input"
+                                    maxLength={256}
+                                    name="name-4"
+                                    data-name="Name 4"
+                                    placeholder="4444 4444 4444 4444"
+                                    data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92203"
+                                    data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92203"]'
+                                    type="tel"
+                                    id="name-4"
+                                  />
                                   <div
-                                    data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92205"
-                                    data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92205"]'
-                                    className="row padding w-row"
+                                    data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92204"
+                                    data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92204"]'
+                                    className="form-group"
                                   >
                                     <div
-                                      data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92206"
-                                      data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92206"]'
-                                      className="col padding w-col w-col-6 w-col-small-6 w-col-tiny-6"
-                                      style={{ padding: 0 }}
+                                      data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92205"
+                                      data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92205"]'
+                                      className="row padding w-row"
                                     >
-                                      <label
-                                        htmlFor="name"
-                                        data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92207"
-                                        data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92207"]'
-                                        className="label"
+                                      <div
+                                        data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92206"
+                                        data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92206"]'
+                                        className="col padding w-col w-col-6 w-col-small-6 w-col-tiny-6"
+                                        style={{ padding: 0 }}
                                       >
-                                        Expiration date
-                                      </label>
-                                      <input
-                                        className="input w-input"
-                                        maxLength={256}
-                                        name="name-4"
-                                        data-name="Name 4"
-                                        placeholder="02 / 2019"
-                                        data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92209"
-                                        data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92209"]'
-                                        type="text"
-                                        id="name-4"
-                                      />
-                                    </div>
-                                    <div
-                                      data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf9220a"
-                                      data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf9220a"]'
-                                      className="col padding w-col w-col-6 w-col-small-6 w-col-tiny-6"
-                                      style={{ padding: 0 }}
-                                    >
-                                      <label
-                                        htmlFor="name"
-                                        data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf9220b"
-                                        data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf9220b"]'
-                                        className="label"
+                                        <label
+                                          htmlFor="name"
+                                          data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92207"
+                                          data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92207"]'
+                                          className="label"
+                                        >
+                                          Expiration date
+                                        </label>
+                                        <input
+                                          className="input w-input"
+                                          maxLength={256}
+                                          name="name-4"
+                                          data-name="Name 4"
+                                          placeholder="02 / 2019"
+                                          data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92209"
+                                          data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92209"]'
+                                          type="text"
+                                          id="name-4"
+                                        />
+                                      </div>
+                                      <div
+                                        data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf9220a"
+                                        data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf9220a"]'
+                                        className="col padding w-col w-col-6 w-col-small-6 w-col-tiny-6"
+                                        style={{ padding: 0 }}
                                       >
-                                        CVC/CVV
-                                      </label>
-                                      <input
-                                        className="input w-input"
-                                        maxLength={256}
-                                        name="name-4"
-                                        data-name="Name 4"
-                                        placeholder={444}
-                                        data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf9220d"
-                                        data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf9220d"]'
-                                        type="text"
-                                        id="name-4"
-                                      />
+                                        <label
+                                          htmlFor="name"
+                                          data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf9220b"
+                                          data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf9220b"]'
+                                          className="label"
+                                        >
+                                          CVC/CVV
+                                        </label>
+                                        <input
+                                          className="input w-input"
+                                          maxLength={256}
+                                          name="name-4"
+                                          data-name="Name 4"
+                                          placeholder={444}
+                                          data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf9220d"
+                                          data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf9220d"]'
+                                          type="text"
+                                          id="name-4"
+                                        />
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                  }}
-                                >
-                                  <label
-                                    htmlFor="name"
-                                    data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92201"
-                                    data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92201"]'
-                                    className="label"
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      justifyContent: "space-between",
+                                    }}
                                   >
-                                    Discount code
-                                  </label>
-                                  <label
-                                    htmlFor="name"
-                                    data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92201"
-                                    data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92201"]'
-                                    className="label"
-                                  >
-                                    Optional
-                                  </label>
+                                    <label
+                                      htmlFor="name"
+                                      data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92201"
+                                      data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92201"]'
+                                      className="label"
+                                    >
+                                      Discount code
+                                    </label>
+                                    <label
+                                      htmlFor="name"
+                                      data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92201"
+                                      data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92201"]'
+                                      className="label"
+                                    >
+                                      Optional
+                                    </label>
+                                  </div>
+                                  <input
+                                    className="input w-input"
+                                    maxLength={256}
+                                    name="name-4"
+                                    data-name="Name 4"
+                                    placeholder=""
+                                    data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92203"
+                                    data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92203"]'
+                                    id="name-4"
+                                  />
                                 </div>
                                 <input
-                                  className="input w-input"
-                                  maxLength={256}
-                                  name="name-4"
-                                  data-name="Name 4"
-                                  placeholder=""
-                                  data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92203"
-                                  data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92203"]'
-                                  id="name-4"
+                                  type="submit"
+                                  data-wait="Please wait..."
+                                  data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf9220e"
+                                  data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf9220e"]'
+                                  className="button button-primary w-button"
+                                  defaultValue="Add payment details"
                                 />
-                              </div>
-                              <input
-                                type="submit"
-                                data-wait="Please wait..."
-                                data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf9220e"
-                                data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf9220e"]'
-                                className="button button-primary w-button"
-                                defaultValue="Add payment details"
-                              />
-                            </form>
-                            <div
-                              data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf9220f"
-                              data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf9220f"]'
-                              className="success-message w-form-done"
-                              tabIndex={-1}
-                              role="region"
-                              aria-label="Email Form success"
-                            >
+                              </form>
                               <div
-                                data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92210"
-                                data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92210"]'
+                                data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf9220f"
+                                data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf9220f"]'
+                                className="success-message w-form-done"
+                                tabIndex={-1}
+                                role="region"
+                                aria-label="Email Form success"
                               >
-                                Thank you! Your submission has been received!
+                                <div
+                                  data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92210"
+                                  data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92210"]'
+                                >
+                                  Thank you! Your submission has been received!
+                                </div>
                               </div>
-                            </div>
-                            <div
-                              data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92212"
-                              data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92212"]'
-                              className="error-message w-form-fail"
-                              tabIndex={-1}
-                              role="region"
-                              aria-label="Email Form failure"
-                            >
                               <div
-                                data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92213"
-                                data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92213"]'
+                                data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92212"
+                                data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92212"]'
+                                className="error-message w-form-fail"
+                                tabIndex={-1}
+                                role="region"
+                                aria-label="Email Form failure"
                               >
-                                Oops! Something went wrong while submitting the
-                                form.
+                                <div
+                                  data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92213"
+                                  data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92213"]'
+                                >
+                                  Oops! Something went wrong while submitting
+                                  the form.
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div
-                          data-w-tab="Tab 2"
-                          data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92215"
-                          data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92215"]'
-                          className="w-tab-pane"
-                          id="w-tabs-1-data-w-pane-1"
-                          role="tabpanel"
-                          aria-labelledby="w-tabs-1-data-w-tab-1"
-                          style={{}}
-                        >
-                          <p
-                            data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92216"
-                            data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92216"]'
-                          >
-                            Proceed to PayPal.
-                          </p>
-                          <a
-                            data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92218"
-                            data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf92218"]'
-                            href="#"
-                            className="button button-primary w-button"
-                          >
+                      ) : (
+                        <div className="w-tab-pane" style={{}}>
+                          <p>Proceed to PayPal.</p>
+                          <button className="button button-primary w-button">
                             Add payment details
-                          </a>
+                          </button>
                         </div>
-                      </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -366,7 +352,6 @@ const Wallet = () => {
                         Payment method
                       </h3>
                     </div>
-                    {/* <div class="module-main"> */}
                     <div
                       data-w-id="daebff06-32ed-13c5-ef78-8ae99db48a6f"
                       data-wf-id='["daebff06-32ed-13c5-ef78-8ae99db48a6f"]'
@@ -529,17 +514,23 @@ const Wallet = () => {
                               }}
                             >
                               <select
-                                name="demoSelect"
-                                id="demoSelect"
                                 style={{ width: 260 }}
-                                // onchange="changeDemo()"
+                                onChange={handleChangeDropdown}
+                                value={demoTypeValue}
                               >
                                 <option value="bronze">Bronze - 100</option>
                                 <option value="silver">Silver - 300</option>
                                 <option value="gold">Gold - 1000</option>
                               </select>
+                              {demoTypeValue === "bronze" ? <></> : null}
                               <h3 className="price-text">
-                                <span id="price-cost">$125</span>
+                                <span id="price-cost">
+                                  {demoTypeValue === "bronze"
+                                    ? "$125"
+                                    : demoTypeValue === "silver"
+                                    ? "$250"
+                                    : "$420"}
+                                </span>
                                 <span className="regular">/month</span>
                               </h3>
                               <p
@@ -550,55 +541,50 @@ const Wallet = () => {
                               </p>
                             </div>
                             <div className="spacer-2 _24" />
-                            <div
-                              className="tick-list w-richtext"
-                              id="bronze-list"
-                            >
-                              <ul role="list">
-                                <li>Cost per lead = $15</li>
-                                <li>Access to solar report</li>
-                                <li>Emails &amp; Telephone of client</li>
-                                <li>Full electricity report of client</li>
-                                <li>Customer profiles</li>
-                              </ul>
-                            </div>
-                            <div
-                              className="tick-list w-richtext"
-                              id="silver-list"
-                            >
-                              <ul role="list">
-                                <li>Cost per lead = $10</li>
-                                <li>Higher conversion rate</li>
-                                <li>Homeowner dashboard</li>
-                                <li>Access to solar report</li>
-                                <li>Emails &amp; Telephone of client</li>
-                                <li>Address of client</li>
-                                <li>Full electricity report of client</li>
-                                <li>Loan payment calculation</li>
-                                <li>Export CSV, PDF</li>
-                                <li>Customer profiles</li>
-                                <li>Unlimited storage</li>
-                              </ul>
-                            </div>
-                            <div
-                              className="tick-list w-richtext"
-                              id="gold-list"
-                            >
-                              <ul role="list">
-                                <li>Cost per lead = $5</li>
-                                <li>Higher conversion rate</li>
-                                <li>Homeowner dashboard</li>
-                                <li>Access to solar report</li>
-                                <li>Emails &amp; Telephone of client</li>
-                                <li>Address of client</li>
-                                <li>Full electricity report of client</li>
-                                <li>Loan payment calculation</li>
-                                <li>Export CSV, PDF</li>
-                                <li>Customer profiles</li>
-                                <li>Unlimited storage</li>
-                                <li>Support and onboarding</li>
-                              </ul>
-                            </div>
+                            {demoTypeValue === "bronze" ? (
+                              <div className="tick-list w-richtext">
+                                <ul role="list">
+                                  <li>Cost per lead = $15</li>
+                                  <li>Access to solar report</li>
+                                  <li>Emails &amp; Telephone of client</li>
+                                  <li>Full electricity report of client</li>
+                                  <li>Customer profiles</li>
+                                </ul>
+                              </div>
+                            ) : demoTypeValue === "silver" ? (
+                              <div className="tick-list w-richtext">
+                                <ul role="list">
+                                  <li>Cost per lead = $10</li>
+                                  <li>Higher conversion rate</li>
+                                  <li>Homeowner dashboard</li>
+                                  <li>Access to solar report</li>
+                                  <li>Emails &amp; Telephone of client</li>
+                                  <li>Address of client</li>
+                                  <li>Full electricity report of client</li>
+                                  <li>Loan payment calculation</li>
+                                  <li>Export CSV, PDF</li>
+                                  <li>Customer profiles</li>
+                                  <li>Unlimited storage</li>
+                                </ul>
+                              </div>
+                            ) : (
+                              <div className="tick-list w-richtext">
+                                <ul role="list">
+                                  <li>Cost per lead = $5</li>
+                                  <li>Higher conversion rate</li>
+                                  <li>Homeowner dashboard</li>
+                                  <li>Access to solar report</li>
+                                  <li>Emails &amp; Telephone of client</li>
+                                  <li>Address of client</li>
+                                  <li>Full electricity report of client</li>
+                                  <li>Loan payment calculation</li>
+                                  <li>Export CSV, PDF</li>
+                                  <li>Customer profiles</li>
+                                  <li>Unlimited storage</li>
+                                  <li>Support and onboarding</li>
+                                </ul>
+                              </div>
+                            )}
                           </div>
                           <div
                             data-w-id="da32af5d-cebf-942c-643a-c06377bc2bae"

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import boards from "../assets/images/Boards.svg";
 import users from "../assets/images/Users.svg";
 import chats from "../assets/images/Chats.svg";
@@ -17,6 +17,8 @@ const SideBar = () => {
   const handleChangeIsOpen = () => {
     setIsOpen(!isOpen);
   };
+  const location = useLocation();
+  // console.log("Location", location);
   return (
     <>
       <div
@@ -53,7 +55,11 @@ const SideBar = () => {
             <div className="sidebar-menu-section bottom-divider">
               <Link
                 to={"/dashboard"}
-                className="sidebar-link w-inline-block w--current"
+                className={
+                  location.pathname === "/dashboard"
+                    ? "sidebar-link w-inline-block w--current"
+                    : "sidebar-link w-inline-block"
+                }
               >
                 <img
                   src={house}
@@ -64,7 +70,14 @@ const SideBar = () => {
                 />
                 <div className="sidebar-link-text">Dashboard</div>
               </Link>
-              <Link to={"/plan"} className="sidebar-link w-inline-block">
+              <Link
+                to={"/plan"}
+                className={
+                  location.pathname === "/plan"
+                    ? "sidebar-link w-inline-block w--current"
+                    : "sidebar-link w-inline-block"
+                }
+              >
                 <img
                   src={note}
                   loading="lazy"
@@ -74,7 +87,14 @@ const SideBar = () => {
                 />
                 <div className="sidebar-link-text">Plan</div>
               </Link>
-              <Link to={"/wallet"} className="sidebar-link w-inline-block">
+              <Link
+                to={"/wallet"}
+                className={
+                  location.pathname === "/wallet"
+                    ? "sidebar-link w-inline-block w--current"
+                    : "sidebar-link w-inline-block"
+                }
+              >
                 <img
                   src={envolopeOpen}
                   loading="lazy"
@@ -84,7 +104,14 @@ const SideBar = () => {
                 />
                 <div className="sidebar-link-text">Wallet</div>
               </Link>
-              <Link to={"/profile"} className="sidebar-link w-inline-block">
+              <Link
+                to={"/profile"}
+                className={
+                  location.pathname === "/profile"
+                    ? "sidebar-link w-inline-block w--current"
+                    : "sidebar-link w-inline-block"
+                }
+              >
                 <img
                   src={calendarBlank}
                   loading="lazy"
@@ -94,7 +121,14 @@ const SideBar = () => {
                 />
                 <div className="sidebar-link-text">Profile</div>
               </Link>
-              <Link to={"/setting"} className="sidebar-link w-inline-block">
+              <Link
+                to={"/setting"}
+                className={
+                  location.pathname === "/setting"
+                    ? "sidebar-link w-inline-block w--current"
+                    : "sidebar-link w-inline-block"
+                }
+              >
                 <img
                   src={boards}
                   loading="lazy"
@@ -106,7 +140,14 @@ const SideBar = () => {
               </Link>
             </div>
             <div className="sidebar-menu-section bottom-divider">
-              <Link to={"/topup"} className="sidebar-link w-inline-block">
+              <Link
+                to={"/topup"}
+                className={
+                  location.pathname === "/topup"
+                    ? "sidebar-link w-inline-block w--current"
+                    : "sidebar-link w-inline-block"
+                }
+              >
                 <img
                   src={users}
                   loading="lazy"
@@ -116,7 +157,14 @@ const SideBar = () => {
                 />
                 <div className="sidebar-link-text">Top up</div>
               </Link>
-              <Link to={"/support"} className="sidebar-link w-inline-block">
+              <Link
+                to={"/support"}
+                className={
+                  location.pathname === "/support"
+                    ? "sidebar-link w-inline-block w--current"
+                    : "sidebar-link w-inline-block"
+                }
+              >
                 <img
                   src={chats}
                   loading="lazy"
@@ -129,9 +177,13 @@ const SideBar = () => {
             </div>
           </div>
           <div className="sidebar-footer">
-            <a
-              href="pages/sign-in.html"
-              className="sidebar-link w-inline-block"
+            <Link
+              to="/help"
+              className={
+                location.pathname === "/help"
+                  ? "sidebar-link w-inline-block w--current"
+                  : "sidebar-link w-inline-block"
+              }
             >
               <img
                 src={question}
@@ -141,7 +193,7 @@ const SideBar = () => {
                 className="sidebar-icon"
               />
               <div className="sidebar-link-text">Log out</div>
-            </a>
+            </Link>
           </div>
         </nav>
         <div className="sidebar-button w-nav-button">
