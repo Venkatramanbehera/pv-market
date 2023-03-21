@@ -46,7 +46,7 @@ const SideBar = () => {
             <div
               data-w-id="09e608d3-5d29-ea1c-8250-9e1401f1ec35"
               className="sidebar-collapse"
-              onClick={handleChangeIsOpen}
+              // onClick={handleChangeIsOpen}
             >
               <img src={collapse} loading="lazy" alt="" />
             </div>
