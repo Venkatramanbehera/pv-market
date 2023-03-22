@@ -12,11 +12,14 @@ import note from "../assets/images/Note.svg";
 import envolopeOpen from "../assets/images/EnvelopeOpen.svg";
 import calendarBlank from "../assets/images/CalendarBlank.svg";
 
-const SideBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const handleChangeIsOpen = () => {
-    setIsOpen(!isOpen);
-  };
+const SideBar = (props) => {
+  // const [isOpen, setIsOpen] = useState(false);
+  // const handleChangeIsOpen = () => {
+  //   setIsOpen(!isOpen);
+  // };
+
+  const {isOpen,handleChangeIsOpen} = props
+
   const location = useLocation();
   // console.log("Location", location);
   return (
@@ -43,7 +46,7 @@ const SideBar = () => {
               </Link>
             ) : null}
 
-            <div className="sidebar-collapse" onClick={handleChangeIsOpen}>
+            <div className={isOpen ? "sidebar-collapse-transform" : "sidebar-collapse"} onClick={handleChangeIsOpen}>
               <img src={collapse} loading="lazy" alt="" />
             </div>
           </div>

@@ -26,16 +26,22 @@ import { EmailView } from "./pages/Dashboard/EmailView";
 import { FourOFour } from "./pages/Dashboard/FourOFour";
 import { FourOOne } from "./pages/Dashboard/FourOOne";
 import { Search } from "./pages/Dashboard/Search";
+import { useState } from "react";
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleChangeIsOpen = () => {
+    setIsOpen(!isOpen);
+  };
   return (
+    <>
     <div>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="password_reset" element={<PasswordReset />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen} />} />
           <Route path="detailcustomer" element={<DetailCustomer />} />
           <Route path="editdashboard" element={<EditDashboard />} />
           <Route path="emailview" element={<EmailView />} />
@@ -61,6 +67,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
+    </>
   );
 }
 

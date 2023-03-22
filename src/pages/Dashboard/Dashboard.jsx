@@ -5,13 +5,28 @@ import SideBar from "../../components/SideBar";
 import Navbar from "../../components/Navbar";
 import { Link } from "react-router-dom";
 
-const Dashboard = () => (
+// dashboard-content{
+//   margin-left: -145px;
+// }
+
+const Dashboard = (props) => {
+  const { isOpen,handleChangeIsOpen } = props;
+  
+  // const checkIsopen = () => {
+  //   if(isOpen){
+  //     return "dashboard-content"
+  //   }else{
+  //     return"dashboard-content-open"
+  //   }
+  // }
+
+  return(
   <div className="dashboard-wrapper">
-    <SideBar />
+    <SideBar isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen}/>
     <div className="dashboard-main">
       <div className="sidebar-spacer" />
-      <div className="dashboard-content">
-        <Navbar />
+      <div className={isOpen ? "dashboard-content-open" : "dashboard-content"}>
+        <Navbar/>
         <div className="dashboard-main-content">
           <div className="dashboard-page-header">
             <h2>Market Place</h2>
@@ -386,6 +401,6 @@ const Dashboard = () => (
       </div>
     </div>
   </div>
-);
+)};
 
 export default Dashboard;
