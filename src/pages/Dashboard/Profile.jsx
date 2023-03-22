@@ -1,5 +1,7 @@
 import Navbar from "../../components/Navbar";
 import SideBar from "../../components/SideBar";
+import profile250 from "../../assets/images/profile250.jpg";
+import { Link } from "react-router-dom";
 
 const Profile = () => (
   <>
@@ -17,7 +19,7 @@ const Profile = () => (
               <div className="module center-align sticky">
                 <div className="profile-image large">
                   <img
-                    src="images/profile250.jpg"
+                    src={profile250}
                     loading="lazy"
                     alt=""
                     className="cover-image"
@@ -34,22 +36,16 @@ const Profile = () => (
                   </div>
                   <div className="module-main">
                     <div className="settings-label">Profile Picture</div>
-                    <a href="#" className="button settings w-button">
+                    <button className="button settings w-button">
                       Upload New Picture
-                    </a>
+                    </button>
                     <p className="paragraph-small no-margin">
                       You can upload images up to 400x400px.
                       <br />
                     </p>
                     <div className="divider" />
                     <div className="w-form">
-                      <form
-                        id="email-form"
-                        name="email-form"
-                        data-name="Email Form"
-                        method="get"
-                        className="form"
-                      >
+                      <form className="form">
                         <div className="field-block">
                           <label htmlFor="field">Company Name</label>
                           <input
@@ -133,7 +129,6 @@ const Profile = () => (
                         </div>
                         <input
                           type="submit"
-                          defaultValue="Update and Validate Pin Below"
                           data-wait="Please wait..."
                           className="button settings w-button"
                         />
@@ -232,11 +227,7 @@ const Profile = () => (
             <div className="dashboard-footer">
               <p className="paragraph-small light">
                 © PV Intelligence All Rights Reserved.
-                <a
-                  href="template-resources/licenses.html"
-                  target="_blank"
-                  className="simple-link light"
-                />
+                <Link to={"/licenses"} className="simple-link light" />
               </p>
             </div>
           </div>
