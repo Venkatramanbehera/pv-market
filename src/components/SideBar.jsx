@@ -43,11 +43,7 @@ const SideBar = () => {
               </Link>
             ) : null}
 
-            <div
-              data-w-id="09e608d3-5d29-ea1c-8250-9e1401f1ec35"
-              className="sidebar-collapse"
-              // onClick={handleChangeIsOpen}
-            >
+            <div className="sidebar-collapse" onClick={handleChangeIsOpen}>
               <img src={collapse} loading="lazy" alt="" />
             </div>
           </div>
@@ -68,7 +64,9 @@ const SideBar = () => {
                   alt=""
                   className="sidebar-icon"
                 />
-                <div className="sidebar-link-text">Dashboard</div>
+                {!isOpen ? (
+                  <div className="sidebar-link-text">Dashboard</div>
+                ) : null}
               </Link>
               <Link
                 to={"/plan"}
@@ -85,7 +83,7 @@ const SideBar = () => {
                   alt=""
                   className="sidebar-icon"
                 />
-                <div className="sidebar-link-text">Plan</div>
+                {!isOpen ? <div className="sidebar-link-text">Plan</div> : null}
               </Link>
               <Link
                 to={"/wallet"}
@@ -102,7 +100,9 @@ const SideBar = () => {
                   alt=""
                   className="sidebar-icon"
                 />
-                <div className="sidebar-link-text">Wallet</div>
+                {!isOpen ? (
+                  <div className="sidebar-link-text">Wallet</div>
+                ) : null}
               </Link>
               <Link
                 to={"/profile"}
@@ -119,7 +119,9 @@ const SideBar = () => {
                   alt=""
                   className="sidebar-icon"
                 />
-                <div className="sidebar-link-text">Profile</div>
+                {!isOpen ? (
+                  <div className="sidebar-link-text">Profile</div>
+                ) : null}
               </Link>
               <Link
                 to={"/setting"}
@@ -136,7 +138,9 @@ const SideBar = () => {
                   alt=""
                   className="sidebar-icon"
                 />
-                <div className="sidebar-link-text">Setting</div>
+                {!isOpen ? (
+                  <div className="sidebar-link-text">Setting</div>
+                ) : null}
               </Link>
             </div>
             <div className="sidebar-menu-section bottom-divider">
@@ -155,7 +159,9 @@ const SideBar = () => {
                   alt=""
                   className="sidebar-icon"
                 />
-                <div className="sidebar-link-text">Top up</div>
+                {!isOpen ? (
+                  <div className="sidebar-link-text">Top up</div>
+                ) : null}
               </Link>
               <Link
                 to={"/support"}
@@ -172,7 +178,9 @@ const SideBar = () => {
                   alt=""
                   className="sidebar-icon"
                 />
-                <div className="sidebar-link-text">Support</div>
+                {!isOpen ? (
+                  <div className="sidebar-link-text">Support</div>
+                ) : null}
               </Link>
             </div>
           </div>
@@ -192,7 +200,9 @@ const SideBar = () => {
                 alt=""
                 className="sidebar-icon"
               />
-              <div className="sidebar-link-text">Log out</div>
+              {!isOpen ? (
+                <div className="sidebar-link-text">Log out</div>
+              ) : null}
             </Link>
           </div>
         </nav>
