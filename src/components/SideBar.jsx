@@ -15,28 +15,23 @@ import calendarBlank from "../assets/images/CalendarBlank.svg";
 const SideBar = (props) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
 
-  const {isOpen,handleChangeIsOpen} = props
+  const { isOpen, handleChangeIsOpen } = props;
 
   const ref = useRef();
   useEffect(() => {
     const handler = (event) => {
-      if (
-        navbarOpen &&
-        ref.current &&
-        !ref.current.contains(event.target)
-      ) {
+      if (navbarOpen && ref.current && !ref.current.contains(event.target)) {
         setNavbarOpen(false);
       }
     };
-    document.addEventListener('mousedown', handler);
+    document.addEventListener("mousedown", handler);
     return () => {
       // Cleanup the event listener
-      document.removeEventListener('mousedown', handler);
+      document.removeEventListener("mousedown", handler);
     };
   }, [navbarOpen]);
 
   const location = useLocation();
-  // console.log("Location", location);
   return (
     <>
       <div
@@ -52,7 +47,9 @@ const SideBar = (props) => {
         <nav
           role="navigation"
           ref={ref}
-          className= {`dashboard-sidebar w-nav-menu${navbarOpen ? ' show-menu' : ''}`}
+          className={`dashboard-sidebar w-nav-menu${
+            navbarOpen ? " show-menu" : ""
+          }`}
           style={isOpen ? { width: "75px" } : {}}
         >
           <div className="sidebar-logo-section">
@@ -62,7 +59,12 @@ const SideBar = (props) => {
               </Link>
             ) : null}
 
-            <div className={isOpen ? "sidebar-collapse-transform" : "sidebar-collapse"} onClick={handleChangeIsOpen}>
+            <div
+              className={
+                isOpen ? "sidebar-collapse-transform" : "sidebar-collapse"
+              }
+              onClick={handleChangeIsOpen}
+            >
               <img src={collapse} loading="lazy" alt="" />
             </div>
           </div>
@@ -205,9 +207,9 @@ const SideBar = (props) => {
           </div>
           <div className="sidebar-footer">
             <Link
-              to="/help"
+              to="/"
               className={
-                location.pathname === "/help"
+                location.pathname === "/"
                   ? "sidebar-link w-inline-block w--current"
                   : "sidebar-link w-inline-block"
               }
@@ -226,7 +228,13 @@ const SideBar = (props) => {
           </div>
         </nav>
         <div className="sidebar-button w-nav-button">
-          <img src={menu} loading="lazy" width={22} alt="" onClick={() => setNavbarOpen((prev) => !prev)}/>
+          <img
+            src={menu}
+            loading="lazy"
+            width={22}
+            alt=""
+            onClick={() => setNavbarOpen((prev) => !prev)}
+          />
         </div>
       </div>
     </>

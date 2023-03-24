@@ -1,11 +1,13 @@
 import { useState } from "react";
 import Navbar from "../../components/Navbar";
 import SideBar from "../../components/SideBar";
+import EditIcon from "../../assets/images/payment-edit.png";
+import PaymentClose from "../../assets/images/payment-modal-close.png";
 
 const Wallet = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectDemoTypeModal, setSelectDemoTypeModal] = useState(false);
-  const [step, setStep] = useState(0);
+  // const [step, setStep] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
   const [demoTypeValue, setDemoTypeValue] = useState("");
   const { isOpen, handleChangeIsOpen } = props;
@@ -23,10 +25,12 @@ const Wallet = (props) => {
   return (
     <>
       <div className="dashboard-wrapper">
-        <SideBar isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen}/>
+        <SideBar isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen} />
         <div className="dashboard-main">
           <div className="sidebar-spacer" />
-          <div className={isOpen ? "dashboard-content-open" : "dashboard-content"}>
+          <div
+            className={isOpen ? "dashboard-content-open" : "dashboard-content"}
+          >
             <Navbar />
             <div className="main-content">
               <div className="container w-container">
@@ -71,7 +75,7 @@ const Wallet = (props) => {
                             data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921ed"]'
                           >
                             <input
-                              type="checkbox"
+                              type="radio"
                               name="credit-card"
                               id=""
                               value={paymentMethod}
@@ -118,7 +122,7 @@ const Wallet = (props) => {
                         >
                           <div>
                             <input
-                              type="checkbox"
+                              type="radio"
                               name="credit-card"
                               id=""
                               value={paymentMethod}
@@ -393,7 +397,9 @@ const Wallet = (props) => {
                         href="#"
                         className="edit-current-method modal-action w-inline-block"
                         onClick={handleOpenModal}
-                      ></button>
+                      >
+                        <img src={EditIcon} alt="edit" />
+                      </button>
                       <div
                         data-w-id="da32af5d-cebf-942c-643a-c06377bc2ba5"
                         data-wf-id='["da32af5d-cebf-942c-643a-c06377bc2ba5"]'
@@ -419,7 +425,9 @@ const Wallet = (props) => {
                             href="#"
                             className="modal-close w-inline-block"
                             onClick={handleOpenModal}
-                          ></button>
+                          >
+                            <img src={PaymentClose} alt="payment" />
+                          </button>
                           <div
                             data-w-id="da32af5d-cebf-942c-643a-c06377bc2ba9"
                             data-wf-id='["da32af5d-cebf-942c-643a-c06377bc2ba9"]'
