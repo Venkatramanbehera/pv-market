@@ -1918,7 +1918,7 @@ figcaption {
   box-shadow: 1px 0 5px 0 rgba(0, 0, 0, 0.05);
 }
 
-.dashboard-sidebar-show{
+.dashboard-sidebar-show {
   position: fixed;
   left: 0px;
   top: 0px;
@@ -1939,7 +1939,7 @@ figcaption {
   border-right: 1px solid #dfe3eb;
   background-color: #fff;
   box-shadow: 1px 0 5px 0 rgba(0, 0, 0, 0.05);
-  margin-right: -200px; 
+  margin-right: -200px;
 }
 .show-menu {
   /* width: 100%; */
@@ -1981,7 +1981,7 @@ figcaption {
   -ms-flex: 1;
   flex: 1;
 }
-.dashboard-content-open{
+.dashboard-content-open {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   -ms-flex: 1;
@@ -2085,7 +2085,7 @@ figcaption {
   cursor: pointer;
 }
 
-.sidebar-collapse-transform{
+.sidebar-collapse-transform {
   width: 20px;
   height: 20px;
   margin-left: 3px;
@@ -2093,15 +2093,16 @@ figcaption {
   -webkit-transition: opacity 200ms ease;
   transition: opacity 200ms ease;
   cursor: pointer;
-  transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(180deg) skew(0deg, 0deg);
-    transform-style: preserve-3d;
+  transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
+    rotateY(0deg) rotateZ(180deg) skew(0deg, 0deg);
+  transform-style: preserve-3d;
 }
 
 .sidebar-collapse:hover {
   opacity: 0.6;
 }
 
-.sidebar-collapse-transform:hover{
+.sidebar-collapse-transform:hover {
   opacity: 0.6;
 }
 
@@ -2270,7 +2271,7 @@ figcaption {
 
 .module {
   position: relative;
-  z-index: 1;
+  /* z-index: 1; */
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

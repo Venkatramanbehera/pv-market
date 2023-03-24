@@ -4,22 +4,29 @@ import calendarBlank from "../../assets/images/CalendarBlank.svg";
 import SideBar from "../../components/SideBar";
 import Navbar from "../../components/Navbar";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // dashboard-content{
 //   margin-left: -145px;
 // }
 
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
+
 const Dashboard = (props) => {
   const { isOpen, handleChangeIsOpen } = props;
 
-  const [settingValue, setSettingValue] = useState("");
-  const [activePanel, setActivePanel] = useState("export");
-  const handleChangeSettings = (e) => {
-    console.log("eee", e.target.value);
-    setSettingValue(e.target.value);
-    setActivePanel(e.target.value);
-  };
+  const [activePanel, setActivePanel] = useState({
+    value: "Export CSV",
+    label: "Export CSV",
+  });
+
+  const options = [
+    { value: "Move to contacted list", label: "Move to contacted list" },
+    { value: "Move to approved list", label: "Move to approved list" },
+    { value: "Move to uninterested list", label: "Move to uninterested list" },
+    { value: "Export CSV", label: "Export CSV" },
+  ];
 
   return (
     <div className="dashboard-wrapper">
@@ -33,32 +40,25 @@ const Dashboard = (props) => {
           <div className="dashboard-main-content">
             <div className="dashboard-page-header">
               <h2>Market Place</h2>
-              <div className="settings-div">
-                <select
-                  className="actionSelect"
-                  value={settingValue}
-                  onChange={handleChangeSettings}
-                >
-                  <option value="action">Action</option>
-                  <option value="contacted">Move to contacted list</option>
-                  <option value="approved">Move to approved list</option>
-                  <option value="uninterested">
-                    Move to uninterested list
-                  </option>
-                  <option value="export">Export CSV</option>
-                </select>
+              <div className="settings-div" style={{ width: "300px" }}>
+                <Dropdown
+                  options={options}
+                  placeholder="Select Action ."
+                  value={activePanel}
+                  onChange={setActivePanel}
+                />
               </div>
             </div>
             <div className="_4-grid wf-section">
               <div
                 className={
-                  activePanel === "export"
+                  activePanel.value === "Export CSV"
                     ? "new-leads module module-card  blue"
                     : "new-leads module module-card"
                 }
                 id="new-leads"
                 onClick={() => {
-                  setActivePanel("export");
+                  setActivePanel("Export CSV");
                 }}
               >
                 <div className="module-header minimal">
@@ -70,13 +70,12 @@ const Dashboard = (props) => {
               </div>
               <div
                 className={
-                  activePanel === "contacted"
+                  activePanel.value === "Move to contacted list"
                     ? "new-leads module module-card  blue"
                     : "new-leads module module-card"
                 }
-                id="contacted"
                 onClick={() => {
-                  setActivePanel("contacted");
+                  setActivePanel("Move to contacted list");
                 }}
               >
                 <div className="module-header minimal">
@@ -88,13 +87,13 @@ const Dashboard = (props) => {
               </div>
               <div
                 className={
-                  activePanel === "approved"
+                  activePanel.value === "Move to approved list"
                     ? "new-leads module module-card  blue"
                     : "new-leads module module-card"
                 }
                 id="approved"
                 onClick={() => {
-                  setActivePanel("approved");
+                  setActivePanel("Move to approved list");
                 }}
               >
                 <div className="module-header minimal">
@@ -106,13 +105,12 @@ const Dashboard = (props) => {
               </div>
               <div
                 className={
-                  activePanel === "uninterested"
+                  activePanel.value === "Move to uninterested list"
                     ? "new-leads module module-card  blue"
                     : "new-leads module module-card"
                 }
-                id="uninterested"
                 onClick={() => {
-                  setActivePanel("uninterested");
+                  setActivePanel("Move to uninterested list");
                 }}
               >
                 <div className="module-header minimal">

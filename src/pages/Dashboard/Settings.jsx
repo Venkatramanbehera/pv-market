@@ -1,5 +1,19 @@
+import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import SideBar from "../../components/SideBar";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
+
+const options = ["English", "French", "Spanish", "German"];
+const options3 = ["Daily", "Weekly", "Bi-Weekly", "Monthly"];
+const options2 = [
+  "New Zealand",
+  "America",
+  "North Korea",
+  "Russia",
+  "Australia",
+  "South Africa",
+];
 
 const Settings = (props) => {
   const { isOpen, handleChangeIsOpen } = props;
@@ -19,9 +33,9 @@ return(
             <div className="_1-2-5-grid wf-section">
               <div className="module sticky">
                 <div className="menu-list-section">
-                  <a href="#" className="menu-link w-inline-block">
+                  <Link to={"#"} className="menu-link w-inline-block">
                     <div className="sidebar-link-text">Account Settings</div>
-                  </a>
+                  </Link>
                   <a href="#" className="menu-link w-inline-block">
                     <div className="sidebar-link-text">Email Notifications</div>
                   </a>
@@ -35,63 +49,11 @@ return(
                   <div className="module-main">
                     <div className="settings-div">
                       <div className="settings-label">Language</div>
-                      <div
-                        data-hover="false"
-                        data-delay={0}
-                        className="account-dropdown w-dropdown"
-                      >
-                        <div className="settings-dropdown-toggle w-dropdown-toggle">
-                          <div className="filter-dropdown-icon w-icon-dropdown-toggle" />
-                          <div>English</div>
-                        </div>
-                        <nav className="filter-dropdown-3 w-dropdown-list">
-                          <a href="#" className="filter-option w-dropdown-link">
-                            English
-                          </a>
-                          <a href="#" className="filter-option w-dropdown-link">
-                            French
-                          </a>
-                          <a href="#" className="filter-option w-dropdown-link">
-                            Spanish
-                          </a>
-                          <a href="#" className="filter-option w-dropdown-link">
-                            German
-                          </a>
-                        </nav>
-                      </div>
+                      <Dropdown options={options} />
                     </div>
                     <div className="settings-div">
                       <div className="settings-label">Country</div>
-                      <div
-                        data-hover="false"
-                        data-delay={0}
-                        className="account-dropdown w-dropdown"
-                      >
-                        <div className="settings-dropdown-toggle w-dropdown-toggle">
-                          <div className="filter-dropdown-icon w-icon-dropdown-toggle" />
-                          <div>New Zealand</div>
-                        </div>
-                        <nav className="filter-dropdown-3 w-dropdown-list">
-                          <a href="#" className="filter-option w-dropdown-link">
-                            America
-                          </a>
-                          <a href="#" className="filter-option w-dropdown-link">
-                            North Korea
-                          </a>
-                          <a href="#" className="filter-option w-dropdown-link">
-                            Russia
-                          </a>
-                          <a href="#" className="filter-option w-dropdown-link">
-                            Australia
-                          </a>
-                          <a href="#" className="filter-option w-dropdown-link">
-                            New Zealand
-                          </a>
-                          <a href="#" className="filter-option w-dropdown-link">
-                            South Africa
-                          </a>
-                        </nav>
-                      </div>
+                      <Dropdown options={options2} />
                     </div>
                     <div className="w-form">
                       <form
@@ -248,34 +210,11 @@ return(
                       <div className="settings-label">
                         Notification frequency
                       </div>
-                      <div
-                        data-hover="false"
-                        data-delay={0}
-                        className="account-dropdown w-dropdown"
-                      >
-                        <div className="settings-dropdown-toggle w-dropdown-toggle">
-                          <div className="filter-dropdown-icon w-icon-dropdown-toggle" />
-                          <div>Weekly</div>
-                        </div>
-                        <nav className="filter-dropdown-3 w-dropdown-list">
-                          <a href="#" className="filter-option w-dropdown-link">
-                            Daily
-                          </a>
-                          <a href="#" className="filter-option w-dropdown-link">
-                            Weekly
-                          </a>
-                          <a href="#" className="filter-option w-dropdown-link">
-                            Bi-Weekly
-                          </a>
-                          <a href="#" className="filter-option w-dropdown-link">
-                            Monthly
-                          </a>
-                        </nav>
-                      </div>
+                      <Dropdown options={options3} />
                     </div>
                   </div>
                 </div>
-                <div id="Close-Account" className="module red">
+                <div className="module red">
                   <div className="module-header minimal">
                     <h3 className="module-heading red">Close Account</h3>
                   </div>
