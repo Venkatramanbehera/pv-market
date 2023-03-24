@@ -1918,6 +1918,35 @@ figcaption {
   box-shadow: 1px 0 5px 0 rgba(0, 0, 0, 0.05);
 }
 
+.dashboard-sidebar-show{
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: 100;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 220px;
+  height: 100vh;
+  padding-top: 20px;
+  padding-bottom: 12px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  border-right: 1px solid #dfe3eb;
+  background-color: #fff;
+  box-shadow: 1px 0 5px 0 rgba(0, 0, 0, 0.05);
+  margin-right: -200px; 
+}
+.show-menu {
+  /* width: 100%; */
+  transform: translateX(0px) translateY(0px);
+  display: block !important;
+}
+
 .dashboard-nav {
   position: relative;
   z-index: 2;

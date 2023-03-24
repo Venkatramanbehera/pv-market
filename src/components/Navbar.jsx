@@ -3,6 +3,7 @@ import bell from "../assets/images/Bell.svg";
 import profileimg from "../assets/images/profile250.jpg";
 import caretDown from "../assets/images/CaretDown.svg";
 import logo from "../assets/images/PVMarket-Logo.png";
+import menu from "../assets/images/Menu.svg";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -16,6 +17,7 @@ const Navbar = () => {
   };
   return (
     <>
+    
       <div
         data-collapse="all"
         data-animation="default"

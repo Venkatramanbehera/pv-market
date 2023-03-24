@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import boards from "../assets/images/Boards.svg";
 import users from "../assets/images/Users.svg";
@@ -13,12 +13,27 @@ import envolopeOpen from "../assets/images/EnvelopeOpen.svg";
 import calendarBlank from "../assets/images/CalendarBlank.svg";
 
 const SideBar = (props) => {
-  // const [isOpen, setIsOpen] = useState(false);
-  // const handleChangeIsOpen = () => {
-  //   setIsOpen(!isOpen);
-  // };
+  const [navbarOpen, setNavbarOpen] = useState(false);
 
   const {isOpen,handleChangeIsOpen} = props
+
+  const ref = useRef();
+  useEffect(() => {
+    const handler = (event) => {
+      if (
+        navbarOpen &&
+        ref.current &&
+        !ref.current.contains(event.target)
+      ) {
+        setNavbarOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener('mousedown', handler);
+    };
+  }, [navbarOpen]);
 
   const location = useLocation();
   // console.log("Location", location);
@@ -36,7 +51,8 @@ const SideBar = (props) => {
       >
         <nav
           role="navigation"
-          className="dashboard-sidebar w-nav-menu"
+          ref={ref}
+          className= {`dashboard-sidebar w-nav-menu${navbarOpen ? ' show-menu' : ''}`}
           style={isOpen ? { width: "75px" } : {}}
         >
           <div className="sidebar-logo-section">
@@ -210,7 +226,7 @@ const SideBar = (props) => {
           </div>
         </nav>
         <div className="sidebar-button w-nav-button">
-          <img src={menu} loading="lazy" width={22} alt="" />
+          <img src={menu} loading="lazy" width={22} alt="" onClick={() => setNavbarOpen((prev) => !prev)}/>
         </div>
       </div>
     </>
