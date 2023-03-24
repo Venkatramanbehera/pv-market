@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import SideBar from "../../components/SideBar";
-const Plan = () => (
+const Plan = (props) => {
+  const { isOpen, handleChangeIsOpen } = props;
+
+  return(
   <>
     <div className="dashboard-wrapper">
-      <SideBar />
+      <SideBar isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen}/>
       <div className="dashboard-main">
         <div className="sidebar-spacer" />
-        <div className="dashboard-content">
+        <div className={isOpen ? "dashboard-content-open" : "dashboard-content"}>
           <Navbar />
           <div className="">
             <div className="section wf-section">
@@ -208,5 +211,5 @@ const Plan = () => (
     </div>
     {/* [if lte IE 9]><![endif] */}
   </>
-);
+)};
 export default Plan;

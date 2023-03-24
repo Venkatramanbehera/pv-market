@@ -2,12 +2,14 @@ import { useState } from "react";
 import Navbar from "../../components/Navbar";
 import SideBar from "../../components/SideBar";
 
-const Wallet = () => {
+const Wallet = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectDemoTypeModal, setSelectDemoTypeModal] = useState(false);
   const [step, setStep] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
   const [demoTypeValue, setDemoTypeValue] = useState("");
+  const { isOpen, handleChangeIsOpen } = props;
+
   const handleOpenModal = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -21,10 +23,10 @@ const Wallet = () => {
   return (
     <>
       <div className="dashboard-wrapper">
-        <SideBar />
+        <SideBar isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen}/>
         <div className="dashboard-main">
           <div className="sidebar-spacer" />
-          <div className="dashboard-content">
+          <div className={isOpen ? "dashboard-content-open" : "dashboard-content"}>
             <Navbar />
             <div className="main-content">
               <div className="container w-container">

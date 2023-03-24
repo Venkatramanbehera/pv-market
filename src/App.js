@@ -47,13 +47,13 @@ function App() {
           <Route path="emailview" element={<EmailView />} />
           <Route path="fourofour" element={<FourOFour />} />
           <Route path="fouroone" element={<FourOOne />} />
-          <Route path="plan" element={<Plan />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="plan" element={<Plan isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen} />} />
+          <Route path="profile" element={<Profile isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen}/>} />
           <Route path="search" element={<Search />} />
-          <Route path="setting" element={<Settings />} />
-          <Route path="support" element={<Support />} />
-          <Route path="topup" element={<TopUp />} />
-          <Route path="wallet" element={<Wallet />} />
+          <Route path="setting" element={<Settings isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen}/>} />
+          <Route path="support" element={<Support isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen}/>} />
+          <Route path="topup" element={<TopUp isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen}/>} />
+          <Route path="wallet" element={<Wallet isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen}/>} />
           <Route path="contactsales" element={<ContactSales />} />
           <Route path="help" element={<Help />} />
           <Route path="helppage" element={<HelpPage />} />

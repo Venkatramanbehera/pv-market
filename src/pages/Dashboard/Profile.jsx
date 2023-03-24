@@ -3,13 +3,16 @@ import SideBar from "../../components/SideBar";
 import profile250 from "../../assets/images/profile250.jpg";
 import { Link } from "react-router-dom";
 
-const Profile = () => (
+const Profile = (props) => { 
+  const { isOpen, handleChangeIsOpen } = props;
+  
+  return(
   <>
     <div className="dashboard-wrapper">
-      <SideBar />
+      <SideBar isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen}/>
       <div className="dashboard-main">
         <div className="sidebar-spacer" />
-        <div className="dashboard-content">
+        <div className={isOpen ? "dashboard-content-open" : "dashboard-content"}>
           <Navbar />
           <div className="main-content">
             <div className="container w-container">
@@ -274,6 +277,6 @@ const Profile = () => (
     </div>
     {/* [if lte IE 9]><![endif] */}
   </>
-);
+)};
 
 export default Profile;

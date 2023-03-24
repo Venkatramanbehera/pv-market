@@ -1,13 +1,16 @@
 import Navbar from "../../components/Navbar";
 import SideBar from "../../components/SideBar";
 
-const TopUp = () => (
+const TopUp = (props) => {
+  const { isOpen, handleChangeIsOpen } = props;
+
+return(
   <>
     <div className="dashboard-wrapper">
-      <SideBar />
+      <SideBar isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen}/>
       <div className="dashboard-main">
         <div className="sidebar-spacer" />
-        <div className="dashboard-content">
+        <div className={isOpen ? "dashboard-content-open" : "dashboard-content"}>
           <Navbar />
           <div id="Edit-Profile" className="module">
             <div className="module-header minimal">
@@ -172,6 +175,6 @@ const TopUp = () => (
       </div>
     </div>
   </>
-);
+)};
 
 export default TopUp;

@@ -1,13 +1,16 @@
 import Navbar from "../../components/Navbar";
 import SideBar from "../../components/SideBar";
 
-const Settings = () => (
+const Settings = (props) => {
+  const { isOpen, handleChangeIsOpen } = props;
+
+return(
   <>
     <div className="dashboard-wrapper">
-      <SideBar />
+      <SideBar  isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen}/>
       <div className="dashboard-main">
         <div className="sidebar-spacer" />
-        <div className="dashboard-content">
+        <div className={isOpen ? "dashboard-content-open" : "dashboard-content"}>
           <Navbar />
           <div className="main-content">
             <div className="container w-container">
@@ -378,6 +381,6 @@ const Settings = () => (
     </div>
     {/* [if lte IE 9]><![endif] */}
   </>
-);
+)};
 
 export default Settings;
