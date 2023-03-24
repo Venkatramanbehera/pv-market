@@ -200,32 +200,29 @@ const Navbar = () => {
                 : "profile-menu-list w-dropdown-list"
             }
           >
-            <a href="profile.html" className="profile-menu-link w-nav-link">
+            <Link to={"/profile"} className="profile-menu-link w-nav-link">
               My Profile
-            </a>
-            <a href="settings.html" className="profile-menu-link w-nav-link">
+            </Link>
+            <Link to={"/setting"} className="profile-menu-link w-nav-link">
               Settings
-            </a>
+            </Link>
             <div className="menu-divider" />
-            <a
-              href="pages/terms-conditions.html"
+            <Link
+              to={"/termscondition"}
               className="profile-menu-link w-nav-link"
             >
               Terms &amp; Conditions
-            </a>
-            <a
-              href="pages/privacy-policy.html"
+            </Link>
+            <Link
+              to={"/privacypolicy"}
               className="profile-menu-link w-nav-link"
             >
               Privacy Policy
-            </a>
+            </Link>
             <div className="menu-divider" />
-            <a
-              href="pages/sign-in.html"
-              className="profile-menu-link w-nav-link"
-            >
+            <Link to="/" className="profile-menu-link w-nav-link">
               Log Out
-            </a>
+            </Link>
           </nav>
         </div>
       </div>
