@@ -4,19 +4,25 @@ import collapse from "../../assets/images/Collapse-Icon.svg";
 import "./auth.css";
 import { useState } from "react";
 import { loginOtpRequest,loginRequest } from "../../utils/Requests";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/bootstrap.css";
 
 const SignIn = () => {
   const [isOtp, setIsOtp] = useState(false);
   const [telephone, seTelephone] = useState("");
   const [otp, setOtp] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleNextTelephone = () => {
+    setLoading(true)
     loginOtpRequest(telephone).then((response)=>{
       if(response.status===200){
         setIsOtp(!isOtp);
       }
       alert(response.data.message)
+      setLoading(false)
     }).catch((error)=>{
       alert(error.response.data.message)
+      setLoading(false)
     })
   };
   let navigate = useNavigate();
@@ -26,14 +32,17 @@ const SignIn = () => {
       type:'otp',
       telephone:telephone
     }
+    setLoading(true)
     loginRequest(data).then((response)=>{
       console.log(response)
       if(response.status===200){
         navigate("/dashboard");
       }
       alert(response.data.message)
+      setLoading(false)
     }).catch((error)=>{
       alert(error.response.data.message)
+      setLoading(false)
     })
   };
   return (
@@ -57,7 +66,7 @@ const SignIn = () => {
                   <label htmlFor="Subscriber-Email-3" className="field-label">
                     Telephone
                   </label>
-                  <input
+                  {/* <input
                     type="text"
                     className="simple-input no-margin w-input"
                     maxLength={256}
@@ -68,13 +77,20 @@ const SignIn = () => {
                     required=""
                     value={telephone}
                     onChange={(e)=>seTelephone(e.target.value)}
+                  /> */}
+                  <PhoneInput
+                    country={"eg"}
+                    enableSearch={true}
+                    value={telephone}
+                    onChange={(phone) => seTelephone(phone)}
                   />
                   <div className="spacer _24" />
                   <input
                     type="button"
-                    defaultValue="Next"
+                    defaultValue={loading ? "Please wait..." : "Next" }
                     data-wait="Please wait..."
                     className="button no-margin w-button"
+                    disabled={loading}
                     onClick={handleNextTelephone}
                   />
                 </div>
@@ -98,10 +114,11 @@ const SignIn = () => {
                   <div className="spacer _24" />
                   <input
                     type="submit"
-                    defaultValue="Sign In"
+                    value={loading ? "Please wait..." : "Submit" }
                     data-wait="Please wait..."
                     className="button no-margin w-button"
                     onClick={handleSubmit}
+                    disabled={loading}
                   />
                 </div>
               )}
