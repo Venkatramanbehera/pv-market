@@ -3,15 +3,38 @@ import logo from "../../assets/images/PVMarket-Logo.png";
 import collapse from "../../assets/images/Collapse-Icon.svg";
 import "./auth.css";
 import { useState } from "react";
+import { loginOtpRequest,loginRequest } from "../../utils/Requests";
 
 const SignIn = () => {
   const [isOtp, setIsOtp] = useState(false);
+  const [telephone, seTelephone] = useState("");
+  const [otp, setOtp] = useState("");
   const handleNextTelephone = () => {
-    setIsOtp(!isOtp);
+    loginOtpRequest(telephone).then((response)=>{
+      if(response.status===200){
+        setIsOtp(!isOtp);
+      }
+      alert(response.data.message)
+    }).catch((error)=>{
+      alert(error.response.data.message)
+    })
   };
   let navigate = useNavigate();
   const handleSubmit = () => {
-    navigate("/dashboard");
+    const data = {
+      otp:otp,
+      type:'otp',
+      telephone:telephone
+    }
+    loginRequest(data).then((response)=>{
+      console.log(response)
+      if(response.status===200){
+        navigate("/dashboard");
+      }
+      alert(response.data.message)
+    }).catch((error)=>{
+      alert(error.response.data.message)
+    })
   };
   return (
     <>
@@ -38,11 +61,13 @@ const SignIn = () => {
                     type="text"
                     className="simple-input no-margin w-input"
                     maxLength={256}
-                    name="Subscriber-Email"
-                    data-name="Subscriber Email"
+                    name="Telephone"
+                    data-name="Telephone"
                     placeholder=""
                     id="telephone"
                     required=""
+                    value={telephone}
+                    onChange={(e)=>seTelephone(e.target.value)}
                   />
                   <div className="spacer _24" />
                   <input
@@ -62,11 +87,13 @@ const SignIn = () => {
                     type="text"
                     className="simple-input no-margin w-input"
                     maxLength={256}
-                    name="Subscriber-Email"
-                    data-name="Subscriber Email"
+                    name="Otp"
+                    data-name="Otp"
                     placeholder=""
-                    id="verficationCode"
+                    id="Otp"
                     required=""
+                    value={otp}
+                    onChange={(e)=>setOtp(e.target.value)}
                   />
                   <div className="spacer _24" />
                   <input
