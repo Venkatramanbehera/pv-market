@@ -221,7 +221,7 @@ export const Licenses = () => (
             <div className="w-layout-grid icon-grid">
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -234,7 +234,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -247,7 +247,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -260,7 +260,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -273,7 +273,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -286,7 +286,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -299,7 +299,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -312,7 +312,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -325,7 +325,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -338,7 +338,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -351,7 +351,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -364,7 +364,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -377,7 +377,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -390,7 +390,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -403,7 +403,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -416,7 +416,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -429,7 +429,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -442,7 +442,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -455,7 +455,7 @@ export const Licenses = () => (
               </a>
               <a
                 href="https://phosphoricons.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="w-inline-block"
               >
                 <img
@@ -474,7 +474,7 @@ export const Licenses = () => (
               <h2>Prosphor Icons</h2>
               <a
                 href="https://github.com/phosphor-icons/phosphor-icons"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="blue-link"
               >
                 License Link
@@ -490,7 +490,7 @@ export const Licenses = () => (
         © Dawn All Rights Reserved・&nbsp;Built by&nbsp;
         <a
           href="https://www.nikolaibain.com"
-          target="_blank"
+          target="_blank" rel="noreferrer"
           className="simple-link light"
         >
           Nikolai Bain
@@ -498,7 +498,7 @@ export const Licenses = () => (
         &nbsp;・&nbsp;Powered by{" "}
         <a
           href="https://webflow.com"
-          target="_blank"
+          target="_blank" rel="noreferrer"
           className="simple-link light"
         >
           Webflow
@@ -506,7 +506,7 @@ export const Licenses = () => (
         ・&nbsp;Template{" "}
         <a
           href="../template-resources/licenses.html"
-          target="_blank"
+          target="_blank" rel="noreferrer"
           aria-current="page"
           className="simple-link light w--current"
         >

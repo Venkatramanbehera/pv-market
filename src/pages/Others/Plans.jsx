@@ -585,7 +585,7 @@ export const Plans = () => (
         © Dawn All Rights Reserved・&nbsp;Built by&nbsp;
         <a
           href="https://www.nikolaibain.com"
-          target="_blank"
+          target="_blank" rel="noreferrer"
           className="simple-link light"
         >
           Nikolai Bain
@@ -593,7 +593,7 @@ export const Plans = () => (
         &nbsp;・&nbsp;Powered by{" "}
         <a
           href="https://webflow.com"
-          target="_blank"
+          target="_blank" rel="noreferrer"
           className="simple-link light"
         >
           Webflow
@@ -601,7 +601,7 @@ export const Plans = () => (
         ・&nbsp;Template{" "}
         <a
           href="../template-resources/licenses.html"
-          target="_blank"
+          target="_blank" rel="noreferrer"
           className="simple-link light"
         >
           License

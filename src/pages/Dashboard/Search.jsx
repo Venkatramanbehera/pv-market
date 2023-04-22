@@ -197,7 +197,7 @@ export const Search = () => (
             <div className="nav-spacer" />
             <a
               href="https://webflow.com/templates/html/dawn-dashboard-website-template"
-              target="_blank"
+              target="_blank" rel="noreferrer"
               className="button upgrade w-button"
             >
               Get Template
@@ -373,7 +373,7 @@ export const Search = () => (
               © Dawn All Rights Reserved・&nbsp;Built by&nbsp;
               <a
                 href="https://www.nikolaibain.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="simple-link light"
               >
                 Nikolai Bain
@@ -381,7 +381,7 @@ export const Search = () => (
               &nbsp;・&nbsp;Powered by{" "}
               <a
                 href="https://webflow.com"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="simple-link light"
               >
                 Webflow
@@ -389,7 +389,7 @@ export const Search = () => (
               ・&nbsp;Template{" "}
               <a
                 href="template-resources/licenses.html"
-                target="_blank"
+                target="_blank" rel="noreferrer"
                 className="simple-link light"
               >
                 License

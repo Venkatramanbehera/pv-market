@@ -201,7 +201,7 @@ const ContactSales = () => (
                     By clicking the button above, you agree to our{" "}
                     <a
                       href="../pages/terms-conditions.html"
-                      target="_blank"
+                      target="_blank" rel="noreferrer"
                       className="simple-link light"
                     >
                       Terms &amp; Conditions
@@ -209,7 +209,7 @@ const ContactSales = () => (
                     and{" "}
                     <a
                       href="../pages/privacy-policy.html"
-                      target="_blank"
+                      target="_blank" rel="noreferrer"
                       className="simple-link light"
                     >
                       Privacy Policy
@@ -240,7 +240,7 @@ const ContactSales = () => (
         © Dawn All Rights Reserved・&nbsp;Built by&nbsp;
         <a
           href="https://www.nikolaibain.com"
-          target="_blank"
+          target="_blank" rel="noreferrer"
           className="simple-link light"
         >
           Nikolai Bain
@@ -248,7 +248,7 @@ const ContactSales = () => (
         &nbsp;・&nbsp;Powered by{" "}
         <a
           href="https://webflow.com"
-          target="_blank"
+          target="_blank" rel="noreferrer"
           className="simple-link light"
         >
           Webflow
@@ -256,7 +256,7 @@ const ContactSales = () => (
         ・&nbsp;Template{" "}
         <a
           href="../template-resources/licenses.html"
-          target="_blank"
+          target="_blank" rel="noreferrer"
           className="simple-link light"
         >
           License

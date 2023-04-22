@@ -73,7 +73,7 @@ const SignUp = () => (
           By clicking the button above, you agree to our{" "}
           <a
             href="../pages/terms-conditions.html"
-            target="_blank"
+            target="_blank" rel="noreferrer"
             className="simple-link light"
           >
             Terms &amp; Conditions
@@ -81,7 +81,7 @@ const SignUp = () => (
           and{" "}
           <a
             href="../pages/privacy-policy.html"
-            target="_blank"
+            target="_blank" rel="noreferrer"
             className="simple-link light"
           >
             Privacy Policy

@@ -538,8 +538,8 @@ const Wallet = (props) => {
                                   {demoTypeValue === "bronze"
                                     ? "$125"
                                     : demoTypeValue === "silver"
-                                    ? "$250"
-                                    : "$420"}
+                                      ? "$250"
+                                      : "$420"}
                                 </span>
                                 <span className="regular">/month</span>
                               </h3>
@@ -633,7 +633,7 @@ const Wallet = (props) => {
                           <div
                             id="demo-back"
                             className="demo-back"
-                            // onclick="demoPrev()"
+                          // onclick="demoPrev()"
                           >
                             <img
                               src="images/Collapse-Icon.svg"
@@ -820,7 +820,7 @@ const Wallet = (props) => {
                   © DPV Intelligence. All Rights Reserved.{" "}
                   <a
                     href="template-resources/licenses.html"
-                    target="_blank"
+                    target="_blank" rel="noreferrer"
                     className="simple-link light"
                   />
                 </p>

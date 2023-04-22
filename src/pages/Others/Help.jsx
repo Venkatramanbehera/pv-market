@@ -531,7 +531,7 @@ export const Help = () => (
         © Dawn All Rights Reserved・&nbsp;Built by&nbsp;
         <a
           href="https://www.nikolaibain.com"
-          target="_blank"
+          target="_blank" rel="noreferrer"
           className="simple-link light"
         >
           Nikolai Bain
@@ -539,7 +539,7 @@ export const Help = () => (
         &nbsp;・&nbsp;Powered by{" "}
         <a
           href="https://webflow.com"
-          target="_blank"
+          target="_blank" rel="noreferrer"
           className="simple-link light"
         >
           Webflow
@@ -547,7 +547,7 @@ export const Help = () => (
         ・&nbsp;Template{" "}
         <a
           href="../template-resources/licenses.html"
-          target="_blank"
+          target="_blank" rel="noreferrer"
           className="simple-link light"
         >
           License

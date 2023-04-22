@@ -224,7 +224,7 @@ export const Instructions = () => (
                 To add working membership functionality, add in{" "}
                 <a
                   href="https://www.memberstack.com/builder/webflow"
-                  target="_blank"
+                  target="_blank" rel="noreferrer"
                 >
                   Memberstack
                 </a>
@@ -321,7 +321,7 @@ export const Instructions = () => (
         © Dawn All Rights Reserved・&nbsp;Built by&nbsp;
         <a
           href="https://www.nikolaibain.com"
-          target="_blank"
+          target="_blank" rel="noreferrer"
           className="simple-link light"
         >
           Nikolai Bain
@@ -329,7 +329,7 @@ export const Instructions = () => (
         &nbsp;・&nbsp;Powered by{" "}
         <a
           href="https://webflow.com"
-          target="_blank"
+          target="_blank" rel="noreferrer"
           className="simple-link light"
         >
           Webflow
@@ -337,7 +337,7 @@ export const Instructions = () => (
         ・&nbsp;Template{" "}
         <a
           href="../template-resources/licenses.html"
-          target="_blank"
+          target="_blank" rel="noreferrer"
           className="simple-link light"
         >
           License
