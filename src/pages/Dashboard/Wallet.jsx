@@ -1,8 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import SideBar from "../../components/SideBar";
 import EditIcon from "../../assets/images/payment-edit.png";
 import PaymentClose from "../../assets/images/payment-modal-close.png";
+import { getNewSetupIntentRequest } from "../../utils/Requests";
+import { STRIPE_PUBLISHABLE_KEY } from "../../utils/Global";
+import { Elements, PaymentElement } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import CheckoutForm from "./CheckoutForm";
+
+// const getNewSetupIntent = () => {
+//   getNewSetupIntentRequest()
+//     .then(data => {
+//       return data.json();
+//     })
+//     .then(setup_intent_client_secret => {
+//       const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
+//       const options = {
+//         // passing the client secret obtained in step 3
+//         clientSecret: setup_intent_client_secret,
+//         // Fully customizable with appearance API.
+//         appearance: {/*...*/ },
+//       };
+
+//       return (
+//         <Elements stripe={stripePromise} options={options}>
+//           <CheckoutForm />
+//         </Elements>
+//       );
+//     });
+// }
 
 const Wallet = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,6 +38,8 @@ const Wallet = (props) => {
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
   const [demoTypeValue, setDemoTypeValue] = useState("");
   const { isOpen, handleChangeIsOpen } = props;
+  // const [stripePromise, setStripePromise] = useState(false)
+  const [options, setoptions] = useState(false)
 
   const handleOpenModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -21,6 +50,25 @@ const Wallet = (props) => {
   const handleChangeDropdown = (e) => {
     setDemoTypeValue(e.target.value);
   };
+
+  const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
+  // var options
+
+  useEffect(() => {
+    getNewSetupIntentRequest()
+      .then(data => {
+        return data.json();
+      })
+      .then(setup_intent_client_secret => {
+        setoptions({
+          // passing the client secret obtained in step 3
+          clientSecret: setup_intent_client_secret,
+          // Fully customizable with appearance API.
+          appearance: {/*...*/ },
+        })
+      })
+  }, []);
+
 
   return (
     <>
@@ -166,7 +214,7 @@ const Wallet = (props) => {
                               data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf921fe"]'
                               className="w-form"
                             >
-                              <form
+                              {/* <form
                                 method="get"
                                 name="email-form"
                                 data-name="Email Form"
@@ -305,7 +353,13 @@ const Wallet = (props) => {
                                   className="button button-primary w-button"
                                   defaultValue="Add payment details"
                                 />
-                              </form>
+                              </form> */}
+
+                              {options &&
+                                <Elements stripe={stripePromise} options={options}>
+                                  <CheckoutForm />
+                                </Elements>
+                              }
                               <div
                                 data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf9220f"
                                 data-wf-id='["6e8e10d3-fef0-4c2a-b11f-4f95daf9220f"]'

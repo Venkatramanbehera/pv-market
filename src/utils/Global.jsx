@@ -3,6 +3,7 @@ import { logoutAPICall } from './Requests';
 import { Navigate } from 'react-router-dom';
 
 export const djurl = "http://127.0.0.1:8000"
+export const STRIPE_PUBLISHABLE_KEY = 'pk_test_51M7bfPEK2d8QHRdoUVsMcqDEjoKecFb3TgUYdMUOPqWjkBsYAZZEz4PfxnVPEgeBSFEcckXZ93M5UCCGqqwUg6N900y2ckI9Wm'
 
 export const parseJwt = (token) => {
     var base64Url = token.split('.')[1];
@@ -34,10 +35,10 @@ export const ProtectedRoute = ({ children }) => {
     return children;
 };
 
-export const LogOut=(navigate)=>{
-    logoutAPICall().then((response)=>{
+export const LogOut = (navigate) => {
+    logoutAPICall().then((response) => {
         console.log(response.status)
-        if(response.status===200){
+        if (response.status === 200) {
             console.log('navigating')
             RemoveLoginCookie('userID', 'isLoggedin')
             navigate('/')

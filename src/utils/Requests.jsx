@@ -49,3 +49,14 @@ export const userDetailsRequest = (telephone) => {
 
     )
 }
+
+export function getNewSetupIntentRequest() {
+    return fetch(`${djurl}/payments/getNewSetupIntent`, {
+        headers: {
+            Accept: 'application/json',
+        },
+        credentials: 'include',
+    })
+}
+
+
