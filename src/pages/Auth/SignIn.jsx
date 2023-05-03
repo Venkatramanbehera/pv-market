@@ -2,16 +2,20 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/PVMarket-Logo.png";
 import collapse from "../../assets/images/Collapse-Icon.svg";
 import "./auth.css";
-import { useState } from "react";
-import { loginOtpRequest,loginRequest } from "../../utils/Requests";
+import { useState,useContext } from "react";
+import { loginOtpRequest,loginRequest, userDetailsRequest } from "../../utils/Requests";
 import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/bootstrap.css";
+import 'react-phone-input-2/lib/style.css'
+import { SetLoginCookie, parseJwt } from "../../utils/Global";
+import CompanyProfileContext from "../../contexts/companyProfileContext";
+
 
 const SignIn = () => {
   const [isOtp, setIsOtp] = useState(false);
   const [telephone, seTelephone] = useState("");
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
+  const {companyProfile, setContextCompanyProfile} = useContext(CompanyProfileContext);
   const handleNextTelephone = () => {
     setLoading(true)
     loginOtpRequest(telephone).then((response)=>{
@@ -36,15 +40,26 @@ const SignIn = () => {
     loginRequest(data).then((response)=>{
       console.log(response)
       if(response.status===200){
+        const userID = parseJwt(response.data.access_token).userId;
+        SetLoginCookie(userID, true);
+        getInitialData()
         navigate("/dashboard");
       }
       alert(response.data.message)
       setLoading(false)
     }).catch((error)=>{
-      alert(error.response.data.message)
+      console.log(error)
       setLoading(false)
     })
   };
+
+  const getInitialData=()=>{
+    userDetailsRequest().then((response)=>{
+      if (response.status===200 && response.data && response.data.company_profile){
+        setContextCompanyProfile(response.data.company_profile)
+      }
+    })
+  }
   return (
     <>
       <div className="center-card-container">

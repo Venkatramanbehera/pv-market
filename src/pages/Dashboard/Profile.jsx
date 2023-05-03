@@ -1,11 +1,22 @@
+import { useContext, useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import SideBar from "../../components/SideBar";
 import profile250 from "../../assets/images/profile250.jpg";
 import { Link } from "react-router-dom";
+import CompanyProfileContext from "../../contexts/companyProfileContext";
+
 
 const Profile = (props) => { 
   const { isOpen, handleChangeIsOpen } = props;
-  
+  const {companyProfile, setContextCompanyProfile} = useContext(CompanyProfileContext);
+  const [tempCompanyProfile, setTempCompanyProfile] = useState();
+  console.log('companyProfile')
+  console.log(companyProfile)
+  useEffect(()=>{
+    setTempCompanyProfile(companyProfile)
+  },[companyProfile])
+  console.log('tempCompanyProfile===')
+  console.log(tempCompanyProfile)
   return(
   <>
     <div className="dashboard-wrapper">
@@ -60,6 +71,7 @@ const Profile = (props) => {
                             placeholder=""
                             id="field"
                             required=""
+                            value={tempCompanyProfile?.companyName}
                           />
                         </div>
                         <div className="field-block">
@@ -73,6 +85,7 @@ const Profile = (props) => {
                             placeholder=""
                             id="field"
                             required=""
+                            value={tempCompanyProfile?.companyFullAddress}
                           />
                         </div>
                         <div className="field-block">
@@ -99,6 +112,7 @@ const Profile = (props) => {
                             placeholder=""
                             id="field"
                             required=""
+                            value={tempCompanyProfile?.telephone}
                           />
                         </div>
                         <div className="field-block">
@@ -114,6 +128,7 @@ const Profile = (props) => {
                             placeholder=""
                             id="Role-2"
                             required=""
+                            value={tempCompanyProfile?.contactName}
                           />
                         </div>
                         <div className="field-block">

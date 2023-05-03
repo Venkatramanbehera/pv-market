@@ -4,7 +4,7 @@ import calendarBlank from "../../assets/images/CalendarBlank.svg";
 import SideBar from "../../components/SideBar";
 import Navbar from "../../components/Navbar";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // dashboard-content{
 //   margin-left: -145px;

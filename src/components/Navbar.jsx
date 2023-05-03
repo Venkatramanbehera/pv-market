@@ -5,10 +5,13 @@ import caretDown from "../assets/images/CaretDown.svg";
 import logo from "../assets/images/PVMarket-Logo.png";
 import menu from "../assets/images/Menu.svg";
 import { Link } from "react-router-dom";
-
+import { logoutAPICall } from "../utils/Requests";
+import { useNavigate } from "react-router-dom";
+import { LogOut } from "../utils/Global";
 const Navbar = () => {
   const [notificationModal, setNotificationModal] = useState(false);
   const [profileModal, setProfileModal] = useState(false);
+  let navigate = useNavigate();
   const handleOpenNotificationModal = () => {
     setNotificationModal(!notificationModal);
   };
@@ -220,7 +223,7 @@ const Navbar = () => {
               Privacy Policy
             </Link>
             <div className="menu-divider" />
-            <Link to="/" className="profile-menu-link w-nav-link">
+            <Link onClick={()=>{LogOut(navigate)}} className="profile-menu-link w-nav-link">
               Log Out
             </Link>
           </nav>
