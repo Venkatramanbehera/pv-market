@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import bell from "../assets/images/Bell.svg";
 import profileimg from "../assets/images/profile250.jpg";
 import caretDown from "../assets/images/CaretDown.svg";
@@ -8,9 +8,11 @@ import { Link } from "react-router-dom";
 import { logoutAPICall } from "../utils/Requests";
 import { useNavigate } from "react-router-dom";
 import { LogOut } from "../utils/Global";
+import CompanyProfileContext from "../contexts/companyProfileContext";
 const Navbar = () => {
   const [notificationModal, setNotificationModal] = useState(false);
   const [profileModal, setProfileModal] = useState(false);
+  const {companyProfile} = useContext(CompanyProfileContext);
   let navigate = useNavigate();
   const handleOpenNotificationModal = () => {
     setNotificationModal(!notificationModal);
@@ -182,7 +184,7 @@ const Navbar = () => {
           >
             <div className="profile-image" onClick={handleProfileModal}>
               <img
-                src={profileimg}
+                src={companyProfile.profilePicture}
                 loading="lazy"
                 alt=""
                 className="cover-image"

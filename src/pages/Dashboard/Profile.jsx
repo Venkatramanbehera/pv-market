@@ -1,22 +1,58 @@
 import { useContext, useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import SideBar from "../../components/SideBar";
-import profile250 from "../../assets/images/profile250.jpg";
+// import profile250 from "../../assets/images/profile250.jpg";
 import { Link } from "react-router-dom";
 import CompanyProfileContext from "../../contexts/companyProfileContext";
+import { saveCompanyProfileRequest } from "../../utils/Requests";
 
 
 const Profile = (props) => { 
   const { isOpen, handleChangeIsOpen } = props;
   const {companyProfile, setContextCompanyProfile} = useContext(CompanyProfileContext);
   const [tempCompanyProfile, setTempCompanyProfile] = useState();
-  console.log('companyProfile')
-  console.log(companyProfile)
+  const [loading, setLoading] = useState(false);
+
   useEffect(()=>{
-    setTempCompanyProfile(companyProfile)
+    if(companyProfile){
+      // const tempCompanyProfileData={
+      //   companyName:companyProfile?.companyName,
+      //   contactName:companyProfile?.contactName,
+      //   telephone:companyProfile?.telephone,
+      //   companyFullAddress:companyProfile?.companyFullAddress,
+      //   yearsInBusiness:companyProfile?.yearsInBusiness,
+      //   description:companyProfile?.description,
+      //   email:companyProfile?.email,
+      // }
+      const tempCompanyProfileData = Object.fromEntries(
+        Object.entries(companyProfile)
+          .filter(([key]) => ['profilePicture','companyName', 'contactName', 'telephone', 'companyFullAddress', 'yearsInBusiness', 'description', 'email'].includes(key))
+      );
+      setTempCompanyProfile(tempCompanyProfileData)
+    }
   },[companyProfile])
-  console.log('tempCompanyProfile===')
-  console.log(tempCompanyProfile)
+
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setTempCompanyProfile(prevState => ({ ...prevState, [name]: value }));
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault(); // prevent the default form submission behavior
+
+    setLoading(true)
+    saveCompanyProfileRequest(tempCompanyProfile).then((response)=>{
+      if(response.status === 200){
+        setContextCompanyProfile(response.data)
+      }else{
+        alert(response.data.message)
+      }
+      setLoading(false)
+    }).catch((error)=>{
+      alert(error.response.data.message)
+      setLoading(false)
+    })
+  }
   return(
   <>
     <div className="dashboard-wrapper">
@@ -33,7 +69,7 @@ const Profile = (props) => {
               <div className="module center-align sticky">
                 <div className="profile-image large">
                   <img
-                    src={profile250}
+                    src={companyProfile?.profilePicture}
                     loading="lazy"
                     alt=""
                     className="cover-image"
@@ -59,19 +95,20 @@ const Profile = (props) => {
                     </p>
                     <div className="divider" />
                     <div className="w-form">
-                      <form className="form">
+                      <form className="form" onSubmit={handleSubmit}>
                         <div className="field-block">
                           <label htmlFor="field">Company Name</label>
                           <input
                             type="text"
                             className="text-input filled w-input"
                             maxLength={256}
-                            name="name"
+                            name="companyName"
                             data-name="Name"
                             placeholder=""
                             id="field"
                             required=""
                             value={tempCompanyProfile?.companyName}
+                            onChange={handleInputChange}
                           />
                         </div>
                         <div className="field-block">
@@ -80,12 +117,13 @@ const Profile = (props) => {
                             type="text"
                             className="text-input filled w-input"
                             maxLength={256}
-                            name="profile-email"
+                            name="companyFullAddress"
                             data-name="profile-email"
                             placeholder=""
                             id="field"
                             required=""
                             value={tempCompanyProfile?.companyFullAddress}
+                            onChange={handleInputChange}
                           />
                         </div>
                         <div className="field-block">
@@ -94,11 +132,13 @@ const Profile = (props) => {
                             type="text"
                             className="text-input filled w-input"
                             maxLength={256}
-                            name="profile-email"
+                            name="email"
                             data-name="profile-email"
                             placeholder=""
                             id="field"
                             required=""
+                            value={tempCompanyProfile?.email}
+                            onChange={handleInputChange}
                           />
                         </div>
                         <div className="field-block">
@@ -107,12 +147,13 @@ const Profile = (props) => {
                             type="text"
                             className="text-input filled w-input"
                             maxLength={256}
-                            name="profile-email"
+                            name="telephone"
                             data-name="profile-email"
                             placeholder=""
                             id="field"
                             required=""
                             value={tempCompanyProfile?.telephone}
+                            onChange={handleInputChange}
                           />
                         </div>
                         <div className="field-block">
@@ -123,12 +164,13 @@ const Profile = (props) => {
                             type="tel"
                             className="text-input filled w-input"
                             maxLength={256}
-                            name="Role-2"
+                            name="contactName"
                             data-name="Role 2"
                             placeholder=""
                             id="Role-2"
                             required=""
                             value={tempCompanyProfile?.contactName}
+                            onChange={handleInputChange}
                           />
                         </div>
                         <div className="field-block">
@@ -139,76 +181,20 @@ const Profile = (props) => {
                             placeholder=""
                             maxLength={5000}
                             data-name="Field"
-                            name="field"
+                            name="description"
                             id="field"
                             className="text-area filled w-input"
                             defaultValue={""}
+                            value={tempCompanyProfile?.description}
+                            onChange={handleInputChange}
                           />
                         </div>
                         <input
                           type="submit"
                           data-wait="Please wait..."
                           className="button settings w-button"
-                        />
-                      </form>
-                      <div className="form-success w-form-done">
-                        <div>
-                          We've updated your account. Please refresh the page.
-                        </div>
-                      </div>
-                      <div className="form-error w-form-fail">
-                        <div>
-                          Oops! Something went wrong. Please fill in the
-                          required fields and try again.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div id="Social-Profiles" className="module">
-                  <div className="module-header minimal">
-                    <h3 className="module-heading">Please Enter Pin </h3>
-                  </div>
-                  <div className="module-main">
-                    <div className="w-form">
-                      <form
-                        id="email-form"
-                        name="email-form"
-                        data-name="Email Form"
-                        method="get"
-                        className="form"
-                      >
-                        <div className="field-block">
-                          <label htmlFor="field">Email code</label>
-                          <input
-                            type="text"
-                            className="text-input filled w-input"
-                            maxLength={256}
-                            name="name-3"
-                            data-name="Name 3"
-                            placeholder=""
-                            id="field"
-                            required=""
-                          />
-                        </div>
-                        <div className="field-block">
-                          <label htmlFor="Facebook">Telephone code</label>
-                          <input
-                            type="text"
-                            className="text-input w-input"
-                            maxLength={256}
-                            name="Facebook"
-                            data-name="Facebook"
-                            placeholder=""
-                            id="field"
-                            required=""
-                          />
-                        </div>
-                        <input
-                          type="submit"
-                          defaultValue="Validate"
-                          data-wait="Please wait..."
-                          className="button settings w-button"
+                          value={loading ? "Please wait...":"submit" }
+                          disabled={loading}
                         />
                       </form>
                       <div className="form-success w-form-done">

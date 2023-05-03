@@ -60,3 +60,15 @@ export function getNewSetupIntentRequest() {
 }
 
 
+export const saveCompanyProfileRequest = (data) => {
+    return axios(
+        {
+            method: "POST",
+            data:data,
+            url: `${djurl}/company/save-company-profile`,
+            withCredentials: true,
+            headers: { "Content-Type": "application/json" }
+        }
+
+    )
+}
