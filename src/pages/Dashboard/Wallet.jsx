@@ -1,49 +1,23 @@
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import SideBar from "../../components/SideBar";
-import EditIcon from "../../assets/images/payment-edit.png";
-import PaymentClose from "../../assets/images/payment-modal-close.png";
-import { getNewSetupIntentRequest } from "../../utils/Requests";
+import { getNewSetupIntentRequest, getAllPaymentMethodsRequest } from "../../utils/Requests";
 import { STRIPE_PUBLISHABLE_KEY } from "../../utils/Global";
-import { Elements, PaymentElement } from '@stripe/react-stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import CheckoutForm from "./CheckoutForm";
-
-// const getNewSetupIntent = () => {
-//   getNewSetupIntentRequest()
-//     .then(data => {
-//       return data.json();
-//     })
-//     .then(setup_intent_client_secret => {
-//       const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
-//       const options = {
-//         // passing the client secret obtained in step 3
-//         clientSecret: setup_intent_client_secret,
-//         // Fully customizable with appearance API.
-//         appearance: {/*...*/ },
-//       };
-
-//       return (
-//         <Elements stripe={stripePromise} options={options}>
-//           <CheckoutForm />
-//         </Elements>
-//       );
-//     });
-// }
+import PaymentMethodCard from "./PaymentMethodCard";
 
 const Wallet = (props) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectDemoTypeModal, setSelectDemoTypeModal] = useState(false);
   // const [step, setStep] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
   const [demoTypeValue, setDemoTypeValue] = useState("");
   const { isOpen, handleChangeIsOpen } = props;
-  // const [stripePromise, setStripePromise] = useState(false)
   const [options, setoptions] = useState(false)
+  const [paymentMethods, setPaymentMethods] = useState(false)
 
-  const handleOpenModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+
   const handleChangeDemoTypeModal = () => {
     setSelectDemoTypeModal(!selectDemoTypeModal);
   };
@@ -69,6 +43,22 @@ const Wallet = (props) => {
       })
   }, []);
 
+  useEffect(() => {
+    getAllPaymentMethodsRequest()
+      .then(data => {
+        return data.json();
+      })
+      .then(paymentMethods => {
+        if (paymentMethods.length !== 0) {
+          setPaymentMethods(paymentMethods)
+        } else {
+          setPaymentMethods('No payment methods available!')
+        }
+
+      }).catch((error) => {
+        console.log(error, 'error-----------')
+      })
+  }, [])
 
   return (
     <>
@@ -412,118 +402,16 @@ const Wallet = (props) => {
                         Payment method
                       </h3>
                     </div>
-                    <div
-                      data-w-id="daebff06-32ed-13c5-ef78-8ae99db48a6f"
-                      data-wf-id='["daebff06-32ed-13c5-ef78-8ae99db48a6f"]'
-                      className="current-method-container"
-                    >
-                      <img
-                        src="https://uploads-ssl.webflow.com/5d2f26e24904ea2ed96c0fac/5d8100449593d0c28996c3e4_icons8-visa-100.png"
-                        width={40}
-                        data-w-id="daebff06-32ed-13c5-ef78-8ae99db48a70"
-                        data-wf-id='["daebff06-32ed-13c5-ef78-8ae99db48a70"]'
-                        alt=""
-                        className="current-method-icon"
-                      />
-                      <div
-                        data-w-id="daebff06-32ed-13c5-ef78-8ae99db48a71"
-                        data-wf-id='["daebff06-32ed-13c5-ef78-8ae99db48a71"]'
-                        className="current-method-details"
-                      >
-                        <div
-                          data-w-id="daebff06-32ed-13c5-ef78-8ae99db48a72"
-                          data-wf-id='["daebff06-32ed-13c5-ef78-8ae99db48a72"]'
-                          className="hint text-heading-grey"
-                        >
-                          **** **** **** **** 4444
-                        </div>
-                        <div
-                          data-w-id="daebff06-32ed-13c5-ef78-8ae99db48a74"
-                          data-wf-id='["daebff06-32ed-13c5-ef78-8ae99db48a74"]'
-                          className="hint"
-                        >
-                          Expires 02/19
-                        </div>
-                      </div>
-                      <button
-                        data-w-id="daebff06-32ed-13c5-ef78-8ae99db48a76"
-                        data-wf-id='["daebff06-32ed-13c5-ef78-8ae99db48a76"]'
-                        href="#"
-                        className="edit-current-method modal-action w-inline-block"
-                        onClick={handleOpenModal}
-                      >
-                        <img src={EditIcon} alt="edit" />
-                      </button>
-                      <div
-                        data-w-id="da32af5d-cebf-942c-643a-c06377bc2ba5"
-                        data-wf-id='["da32af5d-cebf-942c-643a-c06377bc2ba5"]'
-                        className={
-                          isModalOpen
-                            ? "modal modal--open"
-                            : "modal modal--hide"
-                        }
-                      >
-                        <div
-                          data-w-id="da32af5d-cebf-942c-643a-c06377bc2ba6"
-                          data-wf-id='["da32af5d-cebf-942c-643a-c06377bc2ba6"]'
-                          className="modal-mask"
-                        />
-                        <div
-                          data-w-id="da32af5d-cebf-942c-643a-c06377bc2ba7"
-                          data-wf-id='["da32af5d-cebf-942c-643a-c06377bc2ba7"]'
-                          className="modal-container"
-                        >
-                          <button
-                            data-w-id="da32af5d-cebf-942c-643a-c06377bc2ba8"
-                            data-wf-id='["da32af5d-cebf-942c-643a-c06377bc2ba8"]'
-                            href="#"
-                            className="modal-close w-inline-block"
-                            onClick={handleOpenModal}
-                          >
-                            <img src={PaymentClose} alt="payment" />
-                          </button>
-                          <div
-                            data-w-id="da32af5d-cebf-942c-643a-c06377bc2ba9"
-                            data-wf-id='["da32af5d-cebf-942c-643a-c06377bc2ba9"]'
-                            className="modal-title"
-                          >
-                            <h4
-                              data-w-id="da32af5d-cebf-942c-643a-c06377bc2baa"
-                              data-wf-id='["da32af5d-cebf-942c-643a-c06377bc2baa"]'
-                              className="text-center"
-                            >
-                              Remove payment method
-                            </h4>
-                            <p
-                              data-w-id="da32af5d-cebf-942c-643a-c06377bc2bac"
-                              data-wf-id='["da32af5d-cebf-942c-643a-c06377bc2bac"]'
-                              className="text-center"
-                            >
-                              Are you sure you want to Remove payment method?
-                            </p>
-                          </div>
-                          <div
-                            data-w-id="da32af5d-cebf-942c-643a-c06377bc2bae"
-                            data-wf-id='["da32af5d-cebf-942c-643a-c06377bc2bae"]'
-                          >
-                            <button
-                              className="button-block button button-primary w-button"
-                              onClick={handleOpenModal}
-                            >
-                              Cancel
-                            </button>
-                            <button
-                              data-w-id="da32af5d-cebf-942c-643a-c06377bc2bb1"
-                              data-wf-id='["da32af5d-cebf-942c-643a-c06377bc2bb1"]'
-                              href="#"
-                              className="button-block button button-outline w-button"
-                            >
-                              Remove card
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+
+                    {paymentMethods ?
+                      paymentMethods.map((item, key) => {
+                        return <PaymentMethodCard defaultCard={item.default} brand={item.brand} id={item.id} last4={item.last4} exp_month={item.exp_month} exp_year={item.exp_year} />
+                      })
+                      :
+                      <></>
+                    }
+
+
                     <div style={{ padding: 18 }}>
                       <button
                         data-w-id="6e8e10d3-fef0-4c2a-b11f-4f95daf92218"
@@ -925,3 +813,4 @@ const Wallet = (props) => {
   );
 };
 export default Wallet;
+

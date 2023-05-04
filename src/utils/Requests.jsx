@@ -50,6 +50,15 @@ export const userDetailsRequest = (telephone) => {
     )
 }
 
+export function getAllPaymentMethodsRequest() {
+    return fetch(`${djurl}/payments/getAllPaymentMethods`, {
+        headers: {
+            Accept: 'application/json',
+        },
+        credentials: 'include',
+    })
+}
+
 export function getNewSetupIntentRequest() {
     return fetch(`${djurl}/payments/getNewSetupIntent`, {
         headers: {
@@ -64,11 +73,36 @@ export const saveCompanyProfileRequest = (data) => {
     return axios(
         {
             method: "POST",
-            data:data,
+            data: data,
             url: `${djurl}/company/save-company-profile`,
             withCredentials: true,
             headers: { "Content-Type": "application/json" }
         }
 
     )
+}
+
+export function makePaymentMethodDefaultRequest(payment_method = null) {
+    let requestUrl
+    if (payment_method) {
+        requestUrl = `${djurl}/payments/makePaymentMethodDefault?payment_method=${payment_method}`
+    } else {
+        requestUrl = `${djurl}/payments/makePaymentMethodDefault`
+    }
+    return fetch(requestUrl, {
+        headers: {
+            Accept: 'application/json',
+        },
+        credentials: 'include',
+    })
+}
+
+export function deletePaymentMethodRequest(selected_payment_method) {
+    return fetch(`${djurl}/payments/paymentMethod/${selected_payment_method}/delete`, {
+        headers: {
+            Accept: 'application/json',
+        },
+        credentials: 'include',
+        method: 'delete',
+    })
 }

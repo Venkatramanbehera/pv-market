@@ -12,7 +12,7 @@ import CompanyProfileContext from "../contexts/companyProfileContext";
 const Navbar = () => {
   const [notificationModal, setNotificationModal] = useState(false);
   const [profileModal, setProfileModal] = useState(false);
-  const {companyProfile} = useContext(CompanyProfileContext);
+  const { companyProfile } = useContext(CompanyProfileContext);
   let navigate = useNavigate();
   const handleOpenNotificationModal = () => {
     setNotificationModal(!notificationModal);
@@ -22,7 +22,7 @@ const Navbar = () => {
   };
   return (
     <>
-    
+
       <div
         data-collapse="all"
         data-animation="default"
@@ -183,12 +183,12 @@ const Navbar = () => {
             }
           >
             <div className="profile-image" onClick={handleProfileModal}>
-              <img
+              {/* <img
                 src={companyProfile.profilePicture}
                 loading="lazy"
                 alt=""
                 className="cover-image"
-              />
+              /> */}
             </div>
             <img
               src={caretDown}
@@ -225,7 +225,7 @@ const Navbar = () => {
               Privacy Policy
             </Link>
             <div className="menu-divider" />
-            <Link onClick={()=>{LogOut(navigate)}} className="profile-menu-link w-nav-link">
+            <Link onClick={() => { LogOut(navigate) }} className="profile-menu-link w-nav-link">
               Log Out
             </Link>
           </nav>
