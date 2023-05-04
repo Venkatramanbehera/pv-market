@@ -106,3 +106,26 @@ export function deletePaymentMethodRequest(selected_payment_method) {
         method: 'delete',
     })
 }
+export const getAllCustomersRequest = () => {
+    return axios(
+        {
+            method: "GET",
+            url: `${djurl}/proximity/getAllCustomers`,
+            withCredentials: true,
+            headers: { "Content-Type": "application/json" }
+        }
+
+    )
+}
+
+export const saveNoteRequest = () => {
+    return axios(
+        {
+            method: "GET",
+            url: `${djurl}/proximity/getAllCustomers`,
+            withCredentials: true,
+            headers: { "Content-Type": "application/json" }
+        }
+
+    )
+}

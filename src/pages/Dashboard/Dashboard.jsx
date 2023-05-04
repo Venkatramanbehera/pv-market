@@ -3,8 +3,8 @@ import envolopeOpen from "../../assets/images/EnvelopeOpen.svg";
 import calendarBlank from "../../assets/images/CalendarBlank.svg";
 import SideBar from "../../components/SideBar";
 import Navbar from "../../components/Navbar";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 
 // dashboard-content{
 //   margin-left: -145px;
@@ -12,6 +12,8 @@ import { useState } from "react";
 
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
+import ClientListContext from "../../contexts/clientListContext";
+import { getAllCustomersRequest } from "../../utils/Requests";
 
 const Dashboard = (props) => {
   const { isOpen, handleChangeIsOpen } = props;
@@ -20,7 +22,8 @@ const Dashboard = (props) => {
     value: "Export CSV",
     label: "Export CSV",
   });
-
+  const {clientList, setContextClientList} = useContext(ClientListContext);
+  let navigate = useNavigate();
   const options = [
     { value: "Move to contacted list", label: "Move to contacted list" },
     { value: "Move to approved list", label: "Move to approved list" },
@@ -28,6 +31,19 @@ const Dashboard = (props) => {
     { value: "Export CSV", label: "Export CSV" },
   ];
 
+  useEffect(()=>{
+    getAllCustomersRequest().then((response)=>{
+      if(response.status === 200){
+        setContextClientList(response.data)
+      }else{
+        alert(response.data.message)
+      }
+    }).catch((error)=>{
+      alert(error.response.data.message)
+    })
+  },[])
+console.log('clientList')
+console.log(clientList)
   return (
     <div className="dashboard-wrapper">
       <SideBar isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen} />
@@ -181,204 +197,108 @@ const Dashboard = (props) => {
                     </h4>
                   </div>
                   <div className="w-dyn-list">
-                    <div role="list" className="w-dyn-items">
-                      <div role="listitem" className="w-dyn-item">
-                        <div className="full-customer-row">
-                          <div className="checkbox-grid w-form">
-                            <form
-                              id="email-form"
-                              name="email-form"
-                              data-name="Email Form"
-                              method="get"
-                            >
-                              <label
-                                data-w-id="9e34cfdf-1f8f-fb1e-0e9c-02e82c46c165"
-                                className="w-checkbox checkbox-field-simple"
+                    {clientList&&clientList.target_clients&&clientList.target_clients.map((clientObject)=>{
+                      return(
+                        <div role="list" className="w-dyn-items">
+                        <div role="listitem" className="w-dyn-item">
+                          <div className="full-customer-row">
+                            <div className="checkbox-grid w-form">
+                              <form
+                                id="email-form"
+                                name="email-form"
+                                data-name="Email Form"
+                                method="get"
                               >
-                                <div className="w-checkbox-input w-checkbox-input--inputType-custom checkbox" />
-                                <input
-                                  type="checkbox"
-                                  id="checkbox-8"
-                                  name="checkbox-8"
-                                  data-name="Checkbox 8"
-                                  style={{
-                                    opacity: 0,
-                                    position: "absolute",
-                                    zIndex: -1,
-                                  }}
-                                />
-                                <span
-                                  htmlFor="checkbox-8"
-                                  className="hidden-checkbox-label w-form-label"
+                                <label
+                                  data-w-id="9e34cfdf-1f8f-fb1e-0e9c-02e82c46c165"
+                                  className="w-checkbox checkbox-field-simple"
                                 >
-                                  Fix CSS styling on mobile
-                                </span>
-                              </label>
-                            </form>
-                            <div className="w-form-done">
-                              <div>
-                                Thank you! Your submission has been received!
+                                  <div className="w-checkbox-input w-checkbox-input--inputType-custom checkbox" />
+                                  <input
+                                    type="checkbox"
+                                    id="checkbox-8"
+                                    name="checkbox-8"
+                                    data-name="Checkbox 8"
+                                    style={{
+                                      opacity: 0,
+                                      position: "absolute",
+                                      zIndex: -1,
+                                    }}
+                                  />
+                                  <span
+                                    htmlFor="checkbox-8"
+                                    className="hidden-checkbox-label w-form-label"
+                                  >
+                                    Fix CSS styling on mobile
+                                  </span>
+                                </label>
+                              </form>
+                              <div className="w-form-done">
+                                <div>
+                                  Thank you! Your submission has been received!
+                                </div>
+                              </div>
+                              <div className="w-form-fail">
+                                <div>
+                                  Oops! Something went wrong while submitting the
+                                  form.
+                                </div>
                               </div>
                             </div>
-                            <div className="w-form-fail">
-                              <div>
-                                Oops! Something went wrong while submitting the
-                                form.
-                              </div>
-                            </div>
-                          </div>
-                          <Link
-                            to={"/detailcustomer"}
-                            className="customer-element sm-hidden"
-                          >
-                            <div className="name-truncate">Short Name</div>
-                            <div className="address-truncate">
-                              234 Grennan avenue, Texas, 02061
-                            </div>
-                            <div>1 254 221 0567</div>
-                            <div>
-                              <svg
-                                stroke="currentColor"
-                                fill="currentColor"
-                                strokeWidth={0}
-                                viewBox="0 0 24 24"
-                                height="1em"
-                                width="1em"
-                                xmlns="http://www.w3.org/2000/svg"
-                                style={{ marginRight: 10 }}
-                              >
-                                <path
-                                  fill="none"
-                                  stroke="#000"
-                                  strokeWidth={2}
-                                  d="M6,16 L16,16 L6,16 L6,16 Z M6,12 L18,12 L6,12 L6,12 Z M6,8 L11,8 L6,8 L6,8 Z M14,1 L14,8 L21,8 M3,23 L3,1 L15,1 L21,7 L21,23 L3,23 Z"
-                                />
-                              </svg>
-                            </div>
-                          </Link>
-                          <a
-                            href="./detail_customer.html"
-                            className="customer-element md-hidden"
-                          >
                             <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                              }}
+                              onClick={()=>navigate("/detailcustomer",{state:{clientObject:clientObject}})}
+                              // to={"/detailcustomer"}
+                              className="customer-element sm-hidden"
                             >
-                              <div className="name-truncate">Short Name</div>
-                              <div style={{ marginLeft: 20 }}>
-                                1 254 221 0567
+                              <div className="name-truncate">{clientObject?.client?.name}</div>
+                              <div className="address-truncate">
+                                234 Grennan avenue, Texas, 02061
+                              </div>
+                              <div>1 254 221 0567</div>
+                              <div>
+                                <svg
+                                  stroke="currentColor"
+                                  fill="currentColor"
+                                  strokeWidth={0}
+                                  viewBox="0 0 24 24"
+                                  height="1em"
+                                  width="1em"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  style={{ marginRight: 10 }}
+                                >
+                                  <path
+                                    fill="none"
+                                    stroke="#000"
+                                    strokeWidth={2}
+                                    d="M6,16 L16,16 L6,16 L6,16 Z M6,12 L18,12 L6,12 L6,12 Z M6,8 L11,8 L6,8 L6,8 Z M14,1 L14,8 L21,8 M3,23 L3,1 L15,1 L21,7 L21,23 L3,23 Z"
+                                  />
+                                </svg>
                               </div>
                             </div>
-                            <div className="address-truncate">
-                              234 Grennan avenue, Texas, 02061
-                            </div>
-                          </a>
+                            <a
+                              href="./detail_customer.html"
+                              className="customer-element md-hidden"
+                            >
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "space-between",
+                                }}
+                              >
+                                <div className="name-truncate">jkkjkj</div>
+                                <div style={{ marginLeft: 20 }}>
+                                  1 254 221 0567
+                                </div>
+                              </div>
+                              <div className="address-truncate">
+                                234 Grennan avenue, Texas, 02061
+                              </div>
+                            </a>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div role="list" className="w-dyn-items">
-                      <div role="listitem" className="w-dyn-item">
-                        <div className="full-customer-row">
-                          <div className="checkbox-grid w-form">
-                            <form
-                              id="email-form"
-                              name="email-form"
-                              data-name="Email Form"
-                              method="get"
-                            >
-                              <label
-                                data-w-id="9e34cfdf-1f8f-fb1e-0e9c-02e82c46c165"
-                                className="w-checkbox checkbox-field-simple"
-                              >
-                                <div className="w-checkbox-input w-checkbox-input--inputType-custom checkbox" />
-                                <input
-                                  type="checkbox"
-                                  id="checkbox-8"
-                                  name="checkbox-8"
-                                  data-name="Checkbox 8"
-                                  style={{
-                                    opacity: 0,
-                                    position: "absolute",
-                                    zIndex: -1,
-                                  }}
-                                />
-                                <span
-                                  htmlFor="checkbox-8"
-                                  className="hidden-checkbox-label w-form-label"
-                                >
-                                  Fix CSS styling on mobile
-                                </span>
-                              </label>
-                            </form>
-                            <div className="w-form-done">
-                              <div>
-                                Thank you! Your submission has been received!
-                              </div>
-                            </div>
-                            <div className="w-form-fail">
-                              <div>
-                                Oops! Something went wrong while submitting the
-                                form.
-                              </div>
-                            </div>
-                          </div>
-                          <a
-                            href="./detail_customer.html"
-                            className="customer-element sm-hidden"
-                          >
-                            <div className="name-truncate">
-                              Kofi Mbuk Kofi Mbuk Kofi Mbuk
-                            </div>
-                            <div className="address-truncate">
-                              234 Grennan avenue, Texas, 02061, USA. ABCDFEFCVDF
-                            </div>
-                            <div>1 254 221 0567</div>
-                            <div>
-                              <svg
-                                stroke="currentColor"
-                                fill="currentColor"
-                                strokeWidth={0}
-                                viewBox="0 0 24 24"
-                                height="1em"
-                                width="1em"
-                                xmlns="http://www.w3.org/2000/svg"
-                                style={{ marginRight: 10 }}
-                              >
-                                <path
-                                  fill="none"
-                                  stroke="#000"
-                                  strokeWidth={2}
-                                  d="M6,16 L16,16 L6,16 L6,16 Z M6,12 L18,12 L6,12 L6,12 Z M6,8 L11,8 L6,8 L6,8 Z M14,1 L14,8 L21,8 M3,23 L3,1 L15,1 L21,7 L21,23 L3,23 Z"
-                                />
-                              </svg>
-                            </div>
-                          </a>
-                          <a
-                            href="./detail_customer.html"
-                            className="customer-element md-hidden"
-                          >
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                              }}
-                            >
-                              <div className="name-truncate">
-                                Kofi Mbuk Kofi Mbuk Kofi Mbuk
-                              </div>
-                              <div style={{ marginLeft: 20 }}>
-                                1 254 221 0567
-                              </div>
-                            </div>
-                            <div className="address-truncate">
-                              234 Grennan avenue, Texas, 02061, USA.
-                            </div>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
+                      )
+                    })}
                   </div>
                 </div>
               </div>

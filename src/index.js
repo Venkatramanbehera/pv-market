@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import CompanyProfileProvider from "./providers/companyProfileProvider";
+import ClientListProvider from "./providers/clientListProvider";
 // import { positions, Provider } from "react-alert";
 // import AlertMUITemplate from "react-alert-template-mui";
 // import { render } from "react-dom";
@@ -10,7 +11,9 @@ import CompanyProfileProvider from "./providers/companyProfileProvider";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <CompanyProfileProvider>
-    <App />
+    <ClientListProvider>
+      <App />
+    </ClientListProvider>
   </CompanyProfileProvider>
 );
 

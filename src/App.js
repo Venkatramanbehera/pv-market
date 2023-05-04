@@ -27,7 +27,6 @@ import { FourOFour } from "./pages/Dashboard/FourOFour";
 import { FourOOne } from "./pages/Dashboard/FourOOne";
 import { Search } from "./pages/Dashboard/Search";
 import { useState } from "react";
-import Home from "./pages/Home";
 import AxiosInterceptor from "./utils/axios";
 import { ProtectedRoute } from "./utils/Global";
 
@@ -42,7 +41,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<SignIn />} />
-          <Route path="home" element={<Home />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="password_reset" element={<PasswordReset />} />
           <Route path="dashboard" element={<ProtectedRoute><Dashboard isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen} /></ProtectedRoute>} />
