@@ -118,13 +118,15 @@ export const getAllCustomersRequest = () => {
     )
 }
 
-export const saveNoteRequest = () => {
+export const saveClientNoteRequest = (data) => {
+    console.log(data)
     return axios(
         {
-            method: "GET",
-            url: `${djurl}/proximity/getAllCustomers`,
+            method: "POST",
+            url: `${djurl}/proximity/saveClientNote`,
+            data: data,
             withCredentials: true,
-            headers: { "Content-Type": "application/json" }
+            headers: { "Content-Type": "multipart/form-data" }
         }
 
     )

@@ -1,10 +1,12 @@
 import { useLocation } from "react-router-dom";
 import Navbar from "../../components/Navbar";
-import { useState } from "react";
-import { saveNoteRequest } from "../../utils/Requests";
+import { useContext, useState } from "react";
+import { saveClientNoteRequest, saveNoteRequest } from "../../utils/Requests";
+import ClientListContext from "../../contexts/clientListContext";
 
 export const DetailCustomer = () =>{
   const [loading, setLoading] = useState(false);
+  const {clientList, setContextClientList} = useContext(ClientListContext);
   const location = useLocation();
   const clientObject = location?.state?.clientObject;
   const getFormatedDate = (dateTimeString)=>{
@@ -12,19 +14,36 @@ export const DetailCustomer = () =>{
     return date.toLocaleString('default', { month: 'long' })+" "+ date.getFullYear()
   }
   const saveNote=()=>{
-    const note = document.getElementById('note').value
-    setLoading(true)
-    saveNoteRequest().then((response)=>{
-      if(response.status===200){
-        console.log('done')
-      }else{
-        alert(response.data.message)
+    if(clientObject&&clientObject.client){
+      console.log(clientObject.client.id)
+      const note = document.getElementById('note').value
+      const formData = new FormData();
+      formData.append("clientId",clientObject.client.id)
+      formData.append("note",note)
+      setLoading(true)
+      saveClientNoteRequest(formData).then((response)=>{
+        if(response.status===200){
+          console.log('done')
+          updateItemValue(clientObject.client.id,note)
+        }else{
+          alert(response.data.message)
+        }
+        setLoading(false)
+      }).catch((error)=>{
+        alert(error.response.data.message)
+        setLoading(false)
+      })
+    }
+  }
+
+  function updateItemValue(id, newValue) {
+    const updatedItems = clientList.target_clients.map(item => {
+      if (item.client.id === id) {
+        return { ...item, client: {...item.client,note:newValue} };
       }
-      setLoading(false)
-    }).catch((error)=>{
-      alert(error.response.data.message)
-      setLoading(false)
-    })
+      return item;
+    });
+    setContextClientList({...clientList,target_clients:updatedItems});
   }
   return (
     <div className="dashboard-wrapper">
@@ -54,16 +73,16 @@ export const DetailCustomer = () =>{
                     <div className="module-main">
                       <div className="_50-width">
                         <div className="field-label">Email</div>
-                        <p>{clientObject.client.email}</p>
+                        <p>{clientObject?.client?.email}</p>
                       </div>
                       <div className="_50-width">
                         <div className="field-label">Phone Number</div>
-                        <p>{clientObject.client.telephone}</p>
+                        <p>{clientObject?.client?.telephone}</p>
                       </div>
                       <div className="_50-width">
                         <div className="field-label">Address</div>
                         <p>
-                        {clientObject.client.address}.{" "}
+                        {clientObject?.client?.address}.{" "}
                         </p>
                       </div>
                       <div className="_50-width">
@@ -74,7 +93,7 @@ export const DetailCustomer = () =>{
                       </div>
                       <div className="_50-width">
                         <div className="field-label">Created</div>
-                        <p>{getFormatedDate(clientObject.client.created_at)}</p>
+                        <p>{getFormatedDate(clientObject?.client?.created_at)}</p>
                       </div>
                     </div>
                   </div>
@@ -92,7 +111,7 @@ export const DetailCustomer = () =>{
                           name="note"
                           id="note"
                           className="text-area full-width w-input"
-                          defaultValue={""}
+                          defaultValue={clientObject?.client?.note}
                         />
                       </div>
                       <input
