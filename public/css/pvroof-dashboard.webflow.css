@@ -5297,3 +5297,8 @@ figcaption {
     order: -9999;
   }
 }
+
+
+.LinkDiv {
+  cursor: pointer; /* Change the mouse cursor to indicate that the LinkDiv is clickable */
+}

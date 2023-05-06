@@ -246,16 +246,14 @@ console.log(clientList)
                               </div>
                             </div>
                             <div
-                              onClick={()=>navigate("/detailcustomer",{state:{clientObject:clientObject}})}
-                              // to={"/detailcustomer"}
                               className="customer-element sm-hidden"
-                            >
-                              <div className="name-truncate">{clientObject?.client?.name}</div>
+                              >
+                              <div onClick={()=>navigate("/detailcustomer",{state:{clientObject:clientObject}})} className="name-truncate LinkDiv">{clientObject?.client?.name}</div>
                               <div className="address-truncate">
-                                234 Grennan avenue, Texas, 02061
+                                {clientObject?.client?.address}
                               </div>
-                              <div>1 254 221 0567</div>
-                              <div>
+                              <div>{clientObject?.client?.telephone}</div>
+                              <div className="LinkDiv" onClick={()=>{window.open(clientObject?.report?.pdf_report_short, '_blank')}}>
                                 <svg
                                   stroke="currentColor"
                                   fill="currentColor"
