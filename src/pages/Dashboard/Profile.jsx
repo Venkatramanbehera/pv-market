@@ -5,6 +5,7 @@ import SideBar from "../../components/SideBar";
 import { Link } from "react-router-dom";
 import CompanyProfileContext from "../../contexts/companyProfileContext";
 import { saveCompanyProfileRequest } from "../../utils/Requests";
+import { useAlert } from "react-alert";
 
 
 const Profile = (props) => { 
@@ -12,7 +13,7 @@ const Profile = (props) => {
   const {companyProfile, setContextCompanyProfile} = useContext(CompanyProfileContext);
   const [tempCompanyProfile, setTempCompanyProfile] = useState();
   const [loading, setLoading] = useState(false);
-
+  const customAalert = useAlert();
   useEffect(()=>{
     if(companyProfile){
       const tempCompanyProfileData = Object.fromEntries(
@@ -36,11 +37,11 @@ const Profile = (props) => {
       if(response.status === 200){
         setContextCompanyProfile(response.data)
       }else{
-        alert(response.data.message)
+        customAalert.show(response.data.message)
       }
       setLoading(false)
     }).catch((error)=>{
-      alert(error.response.data.message)
+      customAalert.show(error.response.data.message)
       setLoading(false)
     })
   }

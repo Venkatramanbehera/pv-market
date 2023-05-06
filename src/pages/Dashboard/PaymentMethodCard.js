@@ -3,6 +3,7 @@ import EditIcon from "../../assets/images/payment-edit.png";
 import PaymentClose from "../../assets/images/payment-modal-close.png";
 import { useState } from 'react';
 import { deletePaymentMethodRequest, makePaymentMethodDefaultRequest } from '../../utils/Requests';
+import { useAlert } from 'react-alert';
 
 
 
@@ -12,7 +13,7 @@ const PaymentMethodCard = ({ brand, id, last4, exp_month, exp_year, defaultCard 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [removeCardmsg, setRemoveCardmsg] = useState('Remove Card')
     const [defaultCardmsg, setDefaultCardmsg] = useState('Set as default')
-
+    const customAalert = useAlert();
     const handleOpenModal = () => {
         setIsModalOpen(!isModalOpen);
     };
@@ -23,14 +24,14 @@ const PaymentMethodCard = ({ brand, id, last4, exp_month, exp_year, defaultCard 
             return data.json();
         }).then((response) => {
             if (response.success) {
-                alert("Card removed.")
+                customAalert.show("Card removed.")
                 handleOpenModal()
             } else {
-                alert(response.message)
+                customAalert.show(response.message)
             }
 
         }).catch((error) => {
-            alert(error.message)
+            customAalert.show(error.message)
         })
     }
 
@@ -39,7 +40,7 @@ const PaymentMethodCard = ({ brand, id, last4, exp_month, exp_year, defaultCard 
         makePaymentMethodDefaultRequest(id).then(data => {
             return data.json();
         }).then((response) => {
-            alert("Defaut card updated.")
+            customAalert.show("Defaut card updated.")
             handleOpenModal()
         }).catch((error) => {
             console.log(error)

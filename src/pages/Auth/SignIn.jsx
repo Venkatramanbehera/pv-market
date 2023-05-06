@@ -2,13 +2,13 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/PVMarket-Logo.png";
 import collapse from "../../assets/images/Collapse-Icon.svg";
 import "./auth.css";
-import { useState,useContext } from "react";
+import { useState,useContext, useEffect } from "react";
 import { loginOtpRequest,loginRequest, userDetailsRequest } from "../../utils/Requests";
 import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/style.css'
 import { SetLoginCookie, parseJwt } from "../../utils/Global";
 import CompanyProfileContext from "../../contexts/companyProfileContext";
-
+import { useAlert } from "react-alert";
 
 const SignIn = () => {
   const [isOtp, setIsOtp] = useState(false);
@@ -16,16 +16,18 @@ const SignIn = () => {
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
   const {companyProfile, setContextCompanyProfile} = useContext(CompanyProfileContext);
+  const customAalert = useAlert();
+
   const handleNextTelephone = () => {
     setLoading(true)
     loginOtpRequest(telephone).then((response)=>{
       if(response.status===200){
         setIsOtp(!isOtp);
       }
-      alert(response.data.message)
+      customAalert.show(response.data.message)
       setLoading(false)
     }).catch((error)=>{
-      alert(error.response.data.message)
+      customAalert.show(error.response.data.message)
       setLoading(false)
     })
   };
@@ -45,7 +47,7 @@ const SignIn = () => {
         getInitialData()
         navigate("/dashboard");
       }
-      alert(response.data.message)
+      customAalert.show(response.data.message)
       setLoading(false)
     }).catch((error)=>{
       console.log(error)

@@ -14,6 +14,7 @@ import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import ClientListContext from "../../contexts/clientListContext";
 import { getAllCustomersRequest } from "../../utils/Requests";
+import { useAlert } from "react-alert";
 
 const Dashboard = (props) => {
   const { isOpen, handleChangeIsOpen } = props;
@@ -30,20 +31,19 @@ const Dashboard = (props) => {
     { value: "Move to uninterested list", label: "Move to uninterested list" },
     { value: "Export CSV", label: "Export CSV" },
   ];
-
+  const customAalert = useAlert();
   useEffect(()=>{
     getAllCustomersRequest().then((response)=>{
       if(response.status === 200){
         setContextClientList(response.data)
       }else{
-        alert(response.data.message)
+        customAalert.show(response.data.message)
       }
     }).catch((error)=>{
-      alert(error.response.data.message)
+      customAalert.show(error.response.data.message)
     })
   },[])
-console.log('clientList')
-console.log(clientList)
+
   return (
     <div className="dashboard-wrapper">
       <SideBar isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen} />

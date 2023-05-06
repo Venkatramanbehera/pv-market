@@ -29,6 +29,12 @@ import { Search } from "./pages/Dashboard/Search";
 import { useState } from "react";
 import AxiosInterceptor from "./utils/axios";
 import { ProtectedRoute } from "./utils/Global";
+import { positions, Provider } from "react-alert";
+import AlertMUITemplate from "react-alert-template-mui";
+
+const options = {
+  position: positions.TOP_CENTER
+};
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,6 +43,8 @@ function App() {
   };
   return (
     <>
+      <Provider template={AlertMUITemplate} {...options}>
+
     <div>
       <BrowserRouter>
         <Routes>
@@ -70,6 +78,7 @@ function App() {
         <AxiosInterceptor />
       </BrowserRouter>
     </div>
+    </Provider>
     </>
   );
 }
