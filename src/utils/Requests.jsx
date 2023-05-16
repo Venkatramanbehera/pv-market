@@ -106,11 +106,11 @@ export function deletePaymentMethodRequest(selected_payment_method) {
         method: 'delete',
     })
 }
-export const getAllCustomersRequest = () => {
+export const getOrders = () => {
     return axios(
         {
             method: "GET",
-            url: `${djurl}/proximity/getAllCustomers`,
+            url: `${djurl}/proximity/getOrders`,
             withCredentials: true,
             headers: { "Content-Type": "application/json" }
         }

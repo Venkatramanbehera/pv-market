@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import boards from "../assets/images/Boards.svg";
 import users from "../assets/images/Users.svg";
 import chats from "../assets/images/Chats.svg";
@@ -11,11 +11,15 @@ import house from "../assets/images/House.svg";
 import note from "../assets/images/Note.svg";
 import envolopeOpen from "../assets/images/EnvelopeOpen.svg";
 import calendarBlank from "../assets/images/CalendarBlank.svg";
+import { LogOut } from "../utils/Global";
+import CompanyProfileContext from "../contexts/companyProfileContext";
 
 const SideBar = (props) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
 
   const { isOpen, handleChangeIsOpen } = props;
+  const { companyProfile,setContextCompanyProfile } = useContext(CompanyProfileContext);
+  let navigate = useNavigate();
 
   const ref = useRef();
   useEffect(() => {
@@ -207,7 +211,7 @@ const SideBar = (props) => {
           </div>
           <div className="sidebar-footer">
             <Link
-              to="/"
+              onClick={() => { LogOut(navigate,setContextCompanyProfile) }}
               className={
                 location.pathname === "/"
                   ? "sidebar-link w-inline-block w--current"

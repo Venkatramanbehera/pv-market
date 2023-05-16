@@ -13,29 +13,26 @@ import { useContext, useEffect, useState } from "react";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import ClientListContext from "../../contexts/clientListContext";
-import { getAllCustomersRequest } from "../../utils/Requests";
+import { getOrders } from "../../utils/Requests";
 import { useAlert } from "react-alert";
 
 const Dashboard = (props) => {
   const { isOpen, handleChangeIsOpen } = props;
 
-  const [activePanel, setActivePanel] = useState({
-    value: "Export CSV",
-    label: "Export CSV",
-  });
+  const [activePanel, setActivePanel] = useState("new_clients");
   const {clientList, setContextClientList} = useContext(ClientListContext);
   let navigate = useNavigate();
   const options = [
-    { value: "Move to contacted list", label: "Move to contacted list" },
-    { value: "Move to approved list", label: "Move to approved list" },
-    { value: "Move to uninterested list", label: "Move to uninterested list" },
-    { value: "Export CSV", label: "Export CSV" },
+    { value: "contacted_clients", label: "Move to contacted list" },
+    { value: "approved_clients", label: "Move to approved list" },
+    { value: "uninterested_clients", label: "Move to uninterested list" },
+    { value: "new_clients", label: "Export CSV" },
   ];
   const customAalert = useAlert();
   useEffect(()=>{
-    getAllCustomersRequest().then((response)=>{
+    getOrders().then((response)=>{
       if(response.status === 200){
-        setContextClientList(response.data)
+        setContextClientList(response.data.orders)
       }else{
         customAalert.show(response.data.message)
       }
@@ -61,79 +58,79 @@ const Dashboard = (props) => {
                   options={options}
                   placeholder="Select Action ."
                   value={activePanel}
-                  onChange={setActivePanel}
+                  onChange={(val)=>setActivePanel(val.value)}
                 />
               </div>
             </div>
             <div className="_4-grid wf-section">
               <div
                 className={
-                  activePanel.value === "Export CSV"
+                  activePanel === "new_clients"
                     ? "new-leads module module-card  blue"
                     : "new-leads module module-card"
                 }
                 id="new-leads"
                 onClick={() => {
-                  setActivePanel("Export CSV");
+                  setActivePanel("new_clients");
                 }}
               >
                 <div className="module-header minimal">
                   <h3 className="module-heading">New Leads</h3>
                 </div>
                 <div className="module-main">
-                  <div className="module-number">40</div>
+                  <div className="module-number">{clientList&&clientList.new_clients?clientList.new_clients.length:0}</div>
                 </div>
               </div>
               <div
                 className={
-                  activePanel.value === "Move to contacted list"
+                  activePanel === "contacted_clients"
                     ? "new-leads module module-card  blue"
                     : "new-leads module module-card"
                 }
                 onClick={() => {
-                  setActivePanel("Move to contacted list");
+                  setActivePanel("contacted_clients");
                 }}
               >
                 <div className="module-header minimal">
                   <h3 className="module-heading">Contacted</h3>
                 </div>
                 <div className="module-main">
-                  <div className="module-number">28</div>
+                  <div className="module-number">{clientList&&clientList.contacted_clients?clientList.contacted_clients.length:0}</div>
                 </div>
               </div>
               <div
                 className={
-                  activePanel.value === "Move to approved list"
+                  activePanel === "approved_clients"
                     ? "new-leads module module-card  blue"
                     : "new-leads module module-card"
                 }
                 id="approved"
                 onClick={() => {
-                  setActivePanel("Move to approved list");
+                  setActivePanel("approved_clients");
                 }}
               >
                 <div className="module-header minimal">
                   <h3 className="module-heading">Approved</h3>
                 </div>
                 <div className="module-main">
-                  <div className="module-number">17</div>
+                  <div className="module-number">{clientList&&clientList.approved_clients?clientList.approved_clients.length:0}</div>
                 </div>
               </div>
               <div
                 className={
-                  activePanel.value === "Move to uninterested list"
+                  activePanel === "uninterested_clients"
                     ? "new-leads module module-card  blue"
                     : "new-leads module module-card"
                 }
                 onClick={() => {
-                  setActivePanel("Move to uninterested list");
+                  setActivePanel("uninterested_clients");
                 }}
               >
                 <div className="module-header minimal">
                   <h3 className="module-heading">Uninterested</h3>
                 </div>
                 <div className="module-main">
-                  <div className="module-number">11</div>
+                  <div className="module-number">{clientList&&clientList.uninterested_clients?clientList.uninterested_clients.length:0}</div>
                 </div>
               </div>
             </div>
@@ -197,7 +194,7 @@ const Dashboard = (props) => {
                     </h4>
                   </div>
                   <div className="w-dyn-list">
-                    {clientList&&clientList.target_clients&&clientList.target_clients.map((clientObject)=>{
+                    {clientList&&clientList[activePanel]&&clientList[activePanel].map((clientObject)=>{
                       return(
                         <div role="list" className="w-dyn-items">
                         <div role="listitem" className="w-dyn-item">
@@ -248,12 +245,12 @@ const Dashboard = (props) => {
                             <div
                               className="customer-element sm-hidden"
                               >
-                              <div onClick={()=>navigate("/detailcustomer",{state:{clientObject:clientObject}})} className="name-truncate LinkDiv">{clientObject?.client?.name}</div>
+                              <div onClick={()=>navigate("/detailcustomer",{state:{clientObject:clientObject,activePanel:activePanel}})} className="name-truncate LinkDiv">{clientObject?.client?.name}</div>
                               <div className="address-truncate">
                                 {clientObject?.client?.address}
                               </div>
                               <div>{clientObject?.client?.telephone}</div>
-                              <div className="LinkDiv" onClick={()=>{window.open(clientObject?.report?.pdf_report_short, '_blank')}}>
+                              <div className="LinkDiv" onClick={()=>{window.open(clientObject?.client?.report?.pdf_report_short, '_blank')}}>
                                 <svg
                                   stroke="currentColor"
                                   fill="currentColor"

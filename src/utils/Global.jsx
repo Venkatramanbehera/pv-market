@@ -35,13 +35,18 @@ export const ProtectedRoute = ({ children }) => {
     return children;
 };
 
-export const LogOut = (navigate) => {
+export const LogOut = (navigate,setContextCompanyProfile) => {
+    const finalSignOut=()=>{
+        RemoveLoginCookie('userID', 'isLoggedin')
+            setContextCompanyProfile(null)
+            navigate('/')
+    }
     logoutAPICall().then((response) => {
-        console.log(response.status)
         if (response.status === 200) {
             console.log('navigating')
-            RemoveLoginCookie('userID', 'isLoggedin')
-            navigate('/')
         }
+        finalSignOut()
+    }).catch(()=>{
+        finalSignOut()
     })
 }

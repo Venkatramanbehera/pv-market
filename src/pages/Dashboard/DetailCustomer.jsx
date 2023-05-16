@@ -9,13 +9,15 @@ export const DetailCustomer = () =>{
   const {clientList, setContextClientList} = useContext(ClientListContext);
   const location = useLocation();
   const clientObject = location?.state?.clientObject;
+  const activePanel = location?.state?.activePanel;
+  console.log(activePanel)
   const getFormatedDate = (dateTimeString)=>{
     const date = new Date(dateTimeString);
     return date.toLocaleString('default', { month: 'long' })+" "+ date.getFullYear()
   }
+  console.log(loading)
   const saveNote=()=>{
     if(clientObject&&clientObject.client){
-      console.log(clientObject.client.id)
       const note = document.getElementById('note').value
       const formData = new FormData();
       formData.append("clientId",clientObject.client.id)
@@ -37,13 +39,13 @@ export const DetailCustomer = () =>{
   }
 
   function updateItemValue(id, newValue) {
-    const updatedItems = clientList.target_clients.map(item => {
+    const updatedItems = clientList[activePanel].map(item => {
       if (item.client.id === id) {
         return { ...item, client: {...item.client,note:newValue} };
       }
       return item;
     });
-    setContextClientList({...clientList,target_clients:updatedItems});
+    setContextClientList({...clientList,[activePanel]:updatedItems});
   }
   return (
     <div className="dashboard-wrapper">
