@@ -3,55 +3,66 @@ import Navbar from "../../components/Navbar";
 import { useContext, useState } from "react";
 import { saveClientNoteRequest, saveNoteRequest } from "../../utils/Requests";
 import ClientListContext from "../../contexts/clientListContext";
+import SideBar from "../../components/SideBar";
 
-export const DetailCustomer = () =>{
+export const DetailCustomer = (props) => {
+  const { isOpen, handleChangeIsOpen } = props;
   const [loading, setLoading] = useState(false);
-  const {clientList, setContextClientList} = useContext(ClientListContext);
+  const { clientList, setContextClientList } = useContext(ClientListContext);
   const location = useLocation();
   const clientObject = location?.state?.clientObject;
   const activePanel = location?.state?.activePanel;
-  console.log(activePanel)
-  const getFormatedDate = (dateTimeString)=>{
+  console.log(activePanel);
+  const getFormatedDate = (dateTimeString) => {
     const date = new Date(dateTimeString);
-    return date.toLocaleString('default', { month: 'long' })+" "+ date.getFullYear()
-  }
-  console.log(loading)
-  const saveNote=()=>{
-    if(clientObject&&clientObject.client){
-      const note = document.getElementById('note').value
+    return (
+      date.toLocaleString("default", { month: "long" }) +
+      " " +
+      date.getFullYear()
+    );
+  };
+  console.log(loading);
+  const saveNote = () => {
+    if (clientObject && clientObject.client) {
+      const note = document.getElementById("note").value;
       const formData = new FormData();
-      formData.append("clientId",clientObject.client.id)
-      formData.append("note",note)
-      setLoading(true)
-      saveClientNoteRequest(formData).then((response)=>{
-        if(response.status===200){
-          console.log('done')
-          updateItemValue(clientObject.client.id,note)
-        }else{
-          alert(response.data.message)
-        }
-        setLoading(false)
-      }).catch((error)=>{
-        alert(error.response.data.message)
-        setLoading(false)
-      })
+      formData.append("clientId", clientObject.client.id);
+      formData.append("note", note);
+      setLoading(true);
+      saveClientNoteRequest(formData)
+        .then((response) => {
+          if (response.status === 200) {
+            console.log("done");
+            updateItemValue(clientObject.client.id, note);
+          } else {
+            alert(response.data.message);
+          }
+          setLoading(false);
+        })
+        .catch((error) => {
+          alert(error.response.data.message);
+          setLoading(false);
+        });
     }
-  }
+  };
 
   function updateItemValue(id, newValue) {
-    const updatedItems = clientList[activePanel].map(item => {
+    const updatedItems = clientList[activePanel].map((item) => {
       if (item.client.id === id) {
-        return { ...item, client: {...item.client,note:newValue} };
+        return { ...item, client: { ...item.client, note: newValue } };
       }
       return item;
     });
-    setContextClientList({...clientList,[activePanel]:updatedItems});
+    setContextClientList({ ...clientList, [activePanel]: updatedItems });
   }
   return (
     <div className="dashboard-wrapper">
+      <SideBar isOpen={isOpen} handleChangeIsOpen={handleChangeIsOpen} />
       <div className="dashboard-main">
         <div className="sidebar-spacer" />
-        <div className="dashboard-content">
+        <div
+          className={isOpen ? "dashboard-content-open" : "dashboard-content"}
+        >
           <Navbar />
           <div className="dashboard-main-content">
             <a href="./dashboard.html">
@@ -83,9 +94,7 @@ export const DetailCustomer = () =>{
                       </div>
                       <div className="_50-width">
                         <div className="field-label">Address</div>
-                        <p>
-                        {clientObject?.client?.address}.{" "}
-                        </p>
+                        <p>{clientObject?.client?.address}. </p>
                       </div>
                       <div className="_50-width">
                         <div className="field-label">
@@ -95,7 +104,9 @@ export const DetailCustomer = () =>{
                       </div>
                       <div className="_50-width">
                         <div className="field-label">Created</div>
-                        <p>{getFormatedDate(clientObject?.client?.created_at)}</p>
+                        <p>
+                          {getFormatedDate(clientObject?.client?.created_at)}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -119,7 +130,7 @@ export const DetailCustomer = () =>{
                       <input
                         type="button"
                         defaultValue="Submit"
-                        value={loading?"Please wait...":"Submit"}
+                        value={loading ? "Please wait..." : "Submit"}
                         data-wait="Please wait..."
                         className="button w-button"
                         onClick={saveNote}
@@ -170,7 +181,8 @@ export const DetailCustomer = () =>{
               © Dawn All Rights Reserved・&nbsp;Built by&nbsp;
               <a
                 href="https://www.nikolaibain.com"
-                target="_blank" rel="noreferrer"
+                target="_blank"
+                rel="noreferrer"
                 className="simple-link light"
               >
                 Nikolai Bain
@@ -178,7 +190,8 @@ export const DetailCustomer = () =>{
               &nbsp;・&nbsp;Powered by{" "}
               <a
                 href="https://webflow.com"
-                target="_blank" rel="noreferrer"
+                target="_blank"
+                rel="noreferrer"
                 className="simple-link light"
               >
                 Webflow
@@ -186,7 +199,8 @@ export const DetailCustomer = () =>{
               ・&nbsp;Template{" "}
               <a
                 href="template-resources/licenses.html"
-                target="_blank" rel="noreferrer"
+                target="_blank"
+                rel="noreferrer"
                 className="simple-link light"
               >
                 License
@@ -194,7 +208,11 @@ export const DetailCustomer = () =>{
             </p>
           </div>
         </div>
-        <div data-hover="false" data-delay={0} className="new-button w-dropdown">
+        <div
+          data-hover="false"
+          data-delay={0}
+          className="new-button w-dropdown"
+        >
           <nav className="add-menu w-dropdown-list">
             <a href="plan.html" className="add-link w-inline-block">
               <img
@@ -230,4 +248,5 @@ export const DetailCustomer = () =>{
         </div>
       </div>
     </div>
-)};
+  );
+};
