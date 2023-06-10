@@ -35,10 +35,11 @@ export const ProtectedRoute = ({ children }) => {
     return children;
 };
 
-export const LogOut = (navigate,setContextCompanyProfile) => {
+export const LogOut = (navigate,setContextCompanyProfile,setContextClientList) => {
     const finalSignOut=()=>{
         RemoveLoginCookie('userID', 'isLoggedin')
             setContextCompanyProfile(null)
+            setContextClientList(null)
             navigate('/')
     }
     logoutAPICall().then((response) => {

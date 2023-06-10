@@ -8,10 +8,14 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { LogOut } from "../utils/Global";
 import CompanyProfileContext from "../contexts/companyProfileContext";
+import ClientListContext from "../contexts/clientListContext";
+
 const Navbar = () => {
   const [notificationModal, setNotificationModal] = useState(false);
   const [profileModal, setProfileModal] = useState(false);
   const { companyProfile,setContextCompanyProfile } = useContext(CompanyProfileContext);
+  const {clientList, setContextClientList} = useContext(ClientListContext);
+
   let navigate = useNavigate();
   const handleOpenNotificationModal = () => {
     setNotificationModal(!notificationModal);
@@ -224,7 +228,7 @@ const Navbar = () => {
               Privacy Policy
             </Link>
             <div className="menu-divider" />
-            <Link onClick={() => { LogOut(navigate,setContextCompanyProfile) }} className="profile-menu-link w-nav-link">
+            <Link onClick={() => { LogOut(navigate,setContextCompanyProfile,setContextClientList) }} className="profile-menu-link w-nav-link">
               Log Out
             </Link>
           </nav>

@@ -34,10 +34,18 @@ const Dashboard = (props) => {
       if(response.status === 200){
         setContextClientList(response.data.orders)
       }else{
+        console.log('else')
+        console.log(response)
         customAalert.show(response.data.message)
       }
     }).catch((error)=>{
-      customAalert.show(error.response.data.message)
+      console.log(error)
+      if(error.response.data.message){
+        customAalert.show(error.response.data.message)
+      }else{
+        customAalert.show(error.response.data.detail)
+      }
+      
     })
   },[])
 

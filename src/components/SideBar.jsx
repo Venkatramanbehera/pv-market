@@ -13,12 +13,15 @@ import envolopeOpen from "../assets/images/EnvelopeOpen.svg";
 import calendarBlank from "../assets/images/CalendarBlank.svg";
 import { LogOut } from "../utils/Global";
 import CompanyProfileContext from "../contexts/companyProfileContext";
+import ClientListContext from "../contexts/clientListContext";
 
 const SideBar = (props) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
 
   const { isOpen, handleChangeIsOpen } = props;
   const { companyProfile,setContextCompanyProfile } = useContext(CompanyProfileContext);
+  const {clientList, setContextClientList} = useContext(ClientListContext);
+
   let navigate = useNavigate();
 
   const ref = useRef();
@@ -211,7 +214,7 @@ const SideBar = (props) => {
           </div>
           <div className="sidebar-footer">
             <Link
-              onClick={() => { LogOut(navigate,setContextCompanyProfile) }}
+              onClick={() => { LogOut(navigate,setContextCompanyProfile,setContextClientList) }}
               className={
                 location.pathname === "/"
                   ? "sidebar-link w-inline-block w--current"
